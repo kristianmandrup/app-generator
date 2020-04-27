@@ -1,3 +1,3 @@
-export interface A {
+export interface IRegistry {
   a: string;
 }

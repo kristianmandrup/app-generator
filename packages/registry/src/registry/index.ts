@@ -1,4 +1,6 @@
-export class Registry {
+import { IRegistry } from '../types';
+
+export class Registry implements IRegistry {
   store = {}
   registry: Registry
 
@@ -6,17 +8,25 @@ export class Registry {
     this.name = name
   }
 
+  build(): any[] {
+    return this.factoryList.map(factory => factory.build())
+  }
+
+  get factoryList() {
+    return Object.values(this.store)
+  }
+
   init() {
     this.registry = this.registry || new Registry()
   }
 
-  add(factory: any, name?: string) {
+  add(factory: IFactory, name?: string) {
     this.init()
     name = name || factory.name
     this.store[name] = factory
   } 
 
-  named(name: string) {
+  named(name: string): IFactory {
     return this.store[name];
   } 
 

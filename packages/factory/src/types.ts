@@ -1,3 +1,4 @@
-export interface A {
-  a: string;
+export interface IFactory {
+  build(schema?: Schema)
+  register(registry: Registry, name?: string)
 }

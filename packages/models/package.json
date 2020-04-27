@@ -1,5 +1,5 @@
 {
-  "name": "@appgenerator/c",
+  "name": "@appgenerator/models",
   "version": "0.0.1",
   "description": "c",
   "main": "./lib/index.js",

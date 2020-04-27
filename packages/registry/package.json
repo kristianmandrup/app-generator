@@ -1,5 +1,5 @@
 {
-  "name": "@appgenerator/d",
+  "name": "@appgenerator/registry",
   "version": "0.0.1",
   "description": "d",
   "main": "./lib/index.js",

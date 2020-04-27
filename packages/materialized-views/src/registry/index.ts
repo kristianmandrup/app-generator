@@ -10,13 +10,12 @@ export class Registry {
     this.registry = this.registry || new Registry()
   }
 
-  add(factory: any, name?: string) {
+  add(string name, factory: any) {
     this.init()
-    name = name || factory.name
     this.store[name] = factory
   } 
 
-  named(name: string) {
+  get(string name) {
     return this.store[name];
   } 
 

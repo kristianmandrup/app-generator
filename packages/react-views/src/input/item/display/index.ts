@@ -6,8 +6,14 @@ export class InputItemContainerDisplay implements IItemContainerDisplay {
     return []
   }
 
+  onChange = (e: any) => {
+    const { name, value } = e.target
+    this.dispatchInputValue({name, value})
+  }
+
   renderItem(): any {
-    return this.displayItem
+    const { displayValue } = this
+    return <input type="text" value={this.displayValue} onChange={onChange}/>
   }
 
   get action() {
@@ -30,11 +36,11 @@ export class InputItemDisplay extends BaseView {
   containerDisplay: IListContainerDisplay
 
   injectContainerDisplay(containerDisplay: IListContainerDisplay) {
-    containerDisplay.displayItem = displayItem
+    containerDisplay.displayValue = displayValue
     this.containerDisplay = containerDisplay;
   }  
 
-  get displayItem(): any {
+  get displayValue(): any {
     return {}
   }
 

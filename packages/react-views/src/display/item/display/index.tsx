@@ -21,8 +21,12 @@ export class ItemContainerDisplay {
     return []
   }
 
+  onClick = (e: any) => {
+  }
+
   renderItem(): any {
-    return this.displayItem
+    const { displayValue } = this
+    return <span class={classNames} onClick={onClick}>{this.displayItem}</span>
   }
 
   render(): any {
@@ -37,12 +41,12 @@ export class ItemDisplay extends BaseView {
   containerDisplay: IListContainerDisplay
 
   injectContainerDisplay(containerDisplay: IListContainerDisplay) {
-    containerDisplay.displayItem = displayItem
+    containerDisplay.displayValue = displayValue
     this.containerDisplay = containerDisplay;
   }  
 
-  get displayItem(): any {
-    return {}
+  get displayValue(): any {
+    return "none"
   }
 
   render(): any {

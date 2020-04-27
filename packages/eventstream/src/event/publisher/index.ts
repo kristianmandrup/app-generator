@@ -4,6 +4,7 @@ import { IEventStream } from '../../stream';
 export class EventPublisher {
 
   to(eventStream: IEventStream) {
+    this.eventStream = eventStream
   }
 
   publish(event: IEvent) {

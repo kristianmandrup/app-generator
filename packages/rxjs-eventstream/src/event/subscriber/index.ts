@@ -1,14 +1,4 @@
-import { IEventStream } from '../../stream/types';
+import { EventSubscriber as _EventSubscriber } from '../../../../eventstream/src/event/subscriber/index';
 
-export interface IEventSubscriber {
-  constructor(public name: string) {    
-  }
-
-  subscribeTo(eventStream: IEventStream) {
-    eventStream.subscribe(this)
-  }
-
-  unsubscribeFrom(eventStream: IEventStream) {
-    eventStream.unsubscribe(this)
-  }
+export class EventSubscriber implements _EventSubscriber {
 }

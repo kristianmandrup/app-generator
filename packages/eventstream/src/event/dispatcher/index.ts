@@ -1,16 +1,16 @@
 import { IEvent } from '../types';
-import { EventStream } from '../../stream/index';
+import { IEventStream } from '../../stream';
 
 export interface IEventDispatcher {
-  dispatch(event: IEvent) {
+  dispatch(event: IEvent)
 }
 
 export class EventDispatcher {
   store = {}
   list = []
-  eventStream: EventStream
+  eventStream: IEventStream
 
-  constructor(public eventStream: EventStream, name?: string) {
+  constructor(public eventStream: IEventStream, name?: string) {
     this.name = name
   }
 

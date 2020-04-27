@@ -1,12 +1,4 @@
-import { IEvent } from '../event/types';
-import { IEventStream } from '../../stream';
+import { EventPublisher as _EventPublisher } from '../../../../eventstream/src/event/publisher';
 
-export class EventPublisher {
-
-  to(eventStream: IEventStream) {
-  }
-
-  publish(event: IEvent) {
-    this.eventStream.publish(event)
-  }
+export class EventPublisher extends _EventPublisher {
 }

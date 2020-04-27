@@ -5,3 +5,8 @@ export interface IEvent {
   data: any;
   timestamp: any;
 }
+
+export interface IEventError extends IEvent {
+  message: string;
+  code: number
+}

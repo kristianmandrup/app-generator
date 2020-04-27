@@ -1,0 +1,29 @@
+{
+  "name": "@appgenerator/c",
+  "version": "0.0.1",
+  "description": "c",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "repository": "",
+  "author": "appgenerator <appgenerator@gmail.com>",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "lib"
+  ],
+  "dependencies": {
+  },
+  "peerDependencies": {
+    "@appgenerator/d": "0.0.1",
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0"
+  },
+  "devDependencies": {
+    "@appgenerator/d": "*"
+  },
+  "scripts": {
+    "start": "tsc -w --preserveWatchOutput"
+  }
+}

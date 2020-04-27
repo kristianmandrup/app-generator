@@ -1,2 +1,7 @@
-export { d } from "./d";
-export * from "./types";
+import * as display from "./display";
+import * input from "./input";
+
+export const controllers = {
+  list,
+  item
+}

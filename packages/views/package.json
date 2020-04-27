@@ -1,5 +1,5 @@
 {
-  "name": "@appgenerator/b",
+  "name": "@appgenerator/views",
   "version": "0.0.1",
   "description": "",
   "main": "./lib/index.js",
@@ -15,7 +15,6 @@
   ],
   "dependencies": {},
   "peerDependencies": {
-    "@appgenerator/d": "0.0.1",
     "react": "^16.8.0",
     "react-dom": "^16.8.0"
   },

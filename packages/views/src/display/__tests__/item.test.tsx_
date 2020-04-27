@@ -2,7 +2,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import { B } from "../B";
+import * from "../item";
 
 describe("B", () => {
   test("Link changes the class when hovered", () => {

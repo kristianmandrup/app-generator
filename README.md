@@ -1,6 +1,6 @@
 # Typescript monorepo for React project
 
-## What I want to achieve?
+## What I want to achieve
 
 - [Monorepo](https://www.atlassian.com/git/tutorials/monorepos) project, to be able to comfortably to develop several packages, which can be used separately but as well together
 - Typescript
@@ -30,7 +30,7 @@ Define dependencies between packages in `dependencies` section of the `package.j
   },
 ```
 
-The `references` for the `tsconfig.json` for each module must match the dependencies 
+The `references` for the `tsconfig.json` for each module must match the dependencies
 of the `package.json` for the module, telling the compiler where to find that dependency module (via relative file path).
 
 ```json

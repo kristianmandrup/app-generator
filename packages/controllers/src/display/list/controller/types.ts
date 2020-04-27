@@ -1,3 +1,3 @@
-export interface A {
-  a: string;
+export interface IListController {
+  
 }

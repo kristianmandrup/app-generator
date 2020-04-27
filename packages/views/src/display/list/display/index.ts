@@ -1,3 +1,3 @@
-export class ListDisplay {
+export class ListDisplay extends BaseView {
   
 }

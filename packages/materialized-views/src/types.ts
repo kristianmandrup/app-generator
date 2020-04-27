@@ -1,3 +1,4 @@
-export interface A {
-  a: string;
+export interface IMaterializedView {
+  get data(): any
 }
+

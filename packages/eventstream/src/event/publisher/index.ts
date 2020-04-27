@@ -1,9 +1,9 @@
-import { EventStream } from './index';
 import { IEvent } from '../event/types';
+import { IEventStream } from '../../stream';
 
-export class Publisher {
+export class EventPublisher {
 
-  to(eventStream: EventStream) {
+  to(eventStream: IEventStream) {
   }
 
   publish(event: IEvent) {

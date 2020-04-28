@@ -3,6 +3,7 @@ import { IMaterializedView } from '../../../materialized-views/src/types';
 
 export interface IView {
   dispatch(event: IEvent)
+  notify(data: any)
   render(): any
 }
 
@@ -24,5 +25,9 @@ export class BaseView implements IView {
 
   render(): any {
     return null
+  }
+
+  notify(data: any) {
+    this.value = this.selector.select()
   }
 }

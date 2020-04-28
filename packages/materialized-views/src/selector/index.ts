@@ -9,9 +9,20 @@ export class IdentitySelectQuery implements ISelectQuery {
 
 export class Selector implements INotifyTarget {
   data: any
+  views = {}
 
   constructor(selectQuery: ISelectQuery) {
     this.selectQuery = selectQuery || new IdentitySelectQuery()
+  }
+
+  addViewTarget(view: IView, name?: string) {
+    name = name || view.name
+    this.views[name] = view
+  }
+
+  removeViewTarget(view: IView, name?: string) {  
+    name = name || view.name
+    delete this.views[name]
   }
 
   injectMVListener(mvListener: IMVListener) {
@@ -27,6 +38,14 @@ export class Selector implements INotifyTarget {
 
   notify(data) {
     this.data = data
+  }
+
+  get viewList() {
+    return Object.values(this.views)
+  }
+
+  notifyViews(names?: string[] = []) {
+    this.viewList.map(view => view.notify(this.data))
   }
 
   select(): any {

@@ -1,15 +1,3 @@
-export interface IListContainerDisplay {
-  get classNames(): string[]
-  renderItem(): any
-  render(): any
-}
-
-export interface IListDisplay {
-  injectContainerDisplay(containerDisplay: IListContainerDisplay)
-  get displayItem(): any
-  render(): any
-}
-
 export class ListContainerDisplay {
   constructor() {
   }

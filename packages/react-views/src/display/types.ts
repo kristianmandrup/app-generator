@@ -1,12 +1,23 @@
-export interface IItemDisplay {
-  get displayItem(): any
+export interface IItemContainerDisplay {
+  get classNames(): string[]
+  renderValue(): any
   render(): any
+}
+
+export interface IItemDisplay {
+  injectContainerDisplay(containerDisplay: IItemContainerDisplay)
+  get valueToDisplay(): any
+  render(): any
+}
+
+export interface IListContainerDisplay {
+  get classNames(): string[]
   renderItem(): any
+  render(): any
 }
 
 export interface IListDisplay {
-  get displayItems(): any[]
+  injectContainerDisplay(containerDisplay: IListContainerDisplay)
+  get itemsToDisplay(): any
   render(): any
-  renderItems(): any
-  renderContainer({renderChildren}): any
 }

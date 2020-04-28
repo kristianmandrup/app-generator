@@ -1,6 +1,6 @@
 import { BaseView } from '../../../base/index';
 
-export class ItemContainerDisplay {
+export class ListContainerDisplay {
   constructor() {
   }
 
@@ -8,35 +8,33 @@ export class ItemContainerDisplay {
     return []
   }
 
-  onClick = (e: any) => {
-  }
-
-  renderItem(): any {
-    const { displayValue } = this
-    return <span class={classNames} onClick={onClick}>{this.displayItem}</span>
+  renderItems(): any {
+    return this.displayItems.map(item => {
+      return item.render()
+    })
   }
 
   render(): any {
     const { classNames } = this
     return <div className={classNames}>
-      { return this.renderItem() }
+      { return this.renderItems() }
     </div>
   }
 }
 
-export class ItemDisplay extends BaseView {
+export class ListDisplay extends BaseView {
   containerDisplay: IListContainerDisplay
 
   injectContainerDisplay(containerDisplay: IListContainerDisplay) {
-    containerDisplay.displayValue = displayValue
+    containerDisplay.displayItems = displayItems
     this.containerDisplay = containerDisplay;
   }  
 
-  get displayValue(): any {
-    return "none"
+  get displayItems(): any[] {
+    return []
   }
 
   render(): any {
-    return this.container.render()
+    return this.container.render()    
   }
 }

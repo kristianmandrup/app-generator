@@ -6,33 +6,24 @@ import { registries } from './registries';
 
 export class Factory {
   registry: IRegistry
+  builder: IBuilder
+  connector: IConnector
 
   constructor(public schema: Schema) {
     this.init()    
   }
 
   init() {
-    this.registry = new Registry(registries)
+    this.registry = new Registry(registries)    
   }
 
-  build(schema?: Schema) {
-    this.schema = schema || this.schema
-    this.buildAll()
+  injectBuilder(builder: IBuilder) {
+    this.builder = builder
   }
 
-  buildAll(): any[] {}
-  const { registry, schema } = this
-  const names = Object.keys(registry)
-  names.map(name => {
-    const entry = registry[name]
-    // such as services
-    const entities = schema.entities()
-    entities.map(entity => {
-      const instance = entry.create(entity)
-      registry.register({ instance, entity })
-    })
-  })
-
+  injectConnector(connector: IConnector) {
+    this.connector = connector
+  }
 
   register(registry: Registry, name?: string) {
     name = name || registry.name

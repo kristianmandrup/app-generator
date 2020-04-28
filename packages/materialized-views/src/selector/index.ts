@@ -15,6 +15,10 @@ export class Selector implements INotifyTarget {
     this.selectQuery = selectQuery || new IdentitySelectQuery()
   }
 
+  setQuery(selectQuery) {
+    this.selectQuery = selectQuery
+  }
+
   addViewTarget(view: IView, name?: string) {
     name = name || view.name
     this.views[name] = view

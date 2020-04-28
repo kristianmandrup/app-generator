@@ -17,8 +17,22 @@ export class Factory {
 
   build(schema?: Schema) {
     this.schema = schema || this.schema
-    this.registry.build()
+    this.buildAll()
   }
+
+  buildAll(): any[] {}
+  const { registry, schema } = this
+  const names = Object.keys(registry)
+  names.map(name => {
+    const entry = registry[name]
+    // such as services
+    const entities = schema.entities()
+    entities.map(entity => {
+      const instance = entry.create(entity)
+      registry.register({ instance, entity })
+    })
+  })
+
 
   register(registry: Registry, name?: string) {
     name = name || registry.name

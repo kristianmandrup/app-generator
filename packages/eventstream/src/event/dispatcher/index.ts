@@ -1,10 +1,6 @@
 import { IEvent } from '../types';
 import { IEventStream } from '../../stream';
 
-export interface IEventDispatcher {
-  dispatch(event: IEvent)
-}
-
 export class EventDispatcher {
   store = {}
   list = []

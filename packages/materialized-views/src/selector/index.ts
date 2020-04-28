@@ -30,9 +30,9 @@ export class Selector implements INotifyTarget {
     this.mvListener = mvListener
   }
 
-  injectMaterializedView(materializedView: IMaterializedView) {
+  injectMaterializedView(mVController: IMVController) {
     const mvListener = new MVListener()
-    mvListener.listenTo(materializedView)
+    mvListener.listenTo(mVController)
     this.injectMVListener(mvListener)
   }
 

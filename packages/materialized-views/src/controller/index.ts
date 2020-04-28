@@ -4,7 +4,7 @@ interface IEventListener {
   notify(event: IEvent)
 }
 
-export class MaterializedView {
+export class MVController {
   store = {}
   subscribers = {}
   listeners = {}

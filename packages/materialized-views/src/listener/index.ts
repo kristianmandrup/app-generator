@@ -1,8 +1,8 @@
 export class MVListener {
   notifyTarget: INotifyTarget
 
-  constructor({materializedView}: {materializedView: IMaterializedView}) {
-    this.listenTo(materializedView)
+  constructor({mvController}: {mvController: IMVController}) {
+    this.listenTo(mvController)
   }
 
   injectNotifyTarget(notifyTarget: INotifyTarget) {
@@ -10,8 +10,8 @@ export class MVListener {
   }
 
   // TODO: generalize
-  listenTo(materializedView: IMaterializedView, name?: string) {
-    if (!materializedView) return
+  listenTo(mvController: IMVController, name?: string) {
+    if (!mvController) return
     materializedView.addListener(this, name)
   }
 

@@ -1,7 +1,7 @@
 import * as list from "./list";
 import * item from "./item";
 
-export const views = {
+export const display = {
   list,
   item
 }

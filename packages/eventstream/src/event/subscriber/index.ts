@@ -1,7 +1,10 @@
 import { IEventStream } from '../../stream/types';
 import { IEventError } from '../types';
 
-export interface IEventSubscriber {
+export class EventSubscriber implements IEventSubscriber {
+  constructor(public name: string) {    
+  }
+
   subscribeTo(eventStream: IEventStream) {
     eventStream.subscribe(this)
   }
@@ -17,20 +20,6 @@ export interface IEventSubscriber {
     this.onEvent(event)
   }
 
-  onError(error: IEventError) {
-    
-  }
-}
-
-export class EventSubscriber implements IEventSubscriber {
-  constructor(public name: string) {    
-  }
-
-  subscribeTo(eventStream: IEventStream) {
-    eventStream.subscribe(this)
-  }
-
-  unsubscribeFrom(eventStream: IEventStream) {
-    eventStream.unsubscribe(this)
+  onError(error: IEventError) {    
   }
 }

@@ -1,7 +1,7 @@
 {
-  "name": "@appgenerator/connector",
+  "name": "@appgenerator/stores",
   "version": "0.0.1",
-  "description": "Connector with plug and socket",
+  "description": "Data stores",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "repository": "",

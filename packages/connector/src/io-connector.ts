@@ -1,5 +1,6 @@
 import { IIOPlug } from './io-plug';
 import { IIOSocket, IOSocket } from './io-socket';
+import { IStoreCommander } from '../../stores/src/store-commander';
 
 export interface IPlugMap {
   [key: string]: IIOPlug
@@ -43,7 +44,9 @@ export interface IOConnectorAddParams {
 export class IOConnector {
   plugMap: IPlugMap
   socketMap: ISocketMap
-  store: IStore
+
+  notifyStore: IStoreCommander
+  publishStore: IStoreCommander  
 
   latest: ILatestData = {
     value: null,
@@ -51,8 +54,25 @@ export class IOConnector {
   }
 
   notify(data: any) {
+    this.storeNotifyData(data)
+    this.notifySockets(data)
+  }
+
+  publish(data: any) {
+    this.notifySockets(data)
+  }
+
+  storeNotifyData(data: any) {
+    this.notifyStore.update(data)
+  }
+
+  storePublishData(data: any) {
+    this.publishStore.update(data)
+  }
+
+  notifySockets(data: any) {
     const sockets = this.socketsAccepting(data)
-    this.notifyAll(sockets, data)
+    this.notifyAll(sockets, data)  
   }
 
   notifyAll(sockets: IIOSocket[], data: any) {

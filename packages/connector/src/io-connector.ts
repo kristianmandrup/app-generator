@@ -1,6 +1,7 @@
 import { IIOPlug } from './io-plug';
 import { IIOSocket, IOSocket } from './io-socket';
 import { IStoreCommander } from '../../stores/src/store-commander';
+import { IPublisher } from './publisher';
 
 export interface IPlugMap {
   [key: string]: IIOPlug
@@ -41,12 +42,13 @@ export interface IOConnectorAddParams {
   plugName: string
 }
 
-export class IOConnector {
+export class IOConnector implements IPublisher, INotifier {
   plugMap: IPlugMap
   socketMap: ISocketMap
 
   notifyStore: IStoreCommander
-  publishStore: IStoreCommander  
+  publishStore: IStoreCommander
+  type: string  
 
   latest: ILatestData = {
     value: null,

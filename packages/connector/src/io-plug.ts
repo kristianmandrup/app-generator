@@ -33,6 +33,7 @@ export class IOPlug extends IOConnectorPart implements IIOPlug {
   }
 
   plugInto(socket: IIOSocket) {
+    this.checkCompatibility(plug)
     this.socket = socket
     socket.accept(this)
   }

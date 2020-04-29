@@ -3,6 +3,7 @@ import { IIOConnectorPart } from './connector-part';
 import { INotifier } from './notifier';
 
 export interface IIOSocket extends IIOConnectorPart {
+  type: string
   accept(plug: IIOPlug)
 }
 
@@ -15,6 +16,7 @@ export class IOSocket extends IOConnectorPart {
   }
 
   accept(plug: IIOPlug) {
+    this.checkCompatibility(plug)
     this.plug = plug
     plug.plugInto(this)
   }

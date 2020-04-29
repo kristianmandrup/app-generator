@@ -7,12 +7,24 @@ export interface IIOConnectorPart {
 
 export class IOConnectorPart {
   name: string
+  type: string
   connector: IIOConnector
 
   constructor({name, connector}: any) {
     this.setName(name)  
     this.partOf(connector)
   }
+
+  isCompatible(part: IOConnectorPart) {
+    return part.type === this.type
+  }
+
+  checkCompatibility(part: IOConnectorPart) {  
+    if (!this.isCompatible(part)) {
+      throw new Error('Incompatible connector parts')
+    }
+  }
+
 
   setName(name: string) {
     if (!name) {
@@ -26,5 +38,6 @@ export class IOConnectorPart {
       throw new Error('missing connector')  
     }
     this.connector = connector
+    this.type = this.type || connector.type
   }
 }

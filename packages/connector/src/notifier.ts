@@ -4,7 +4,6 @@ export interface INotifier {
   notifyError(error: any)
 }
 
-
 export class Notifier {
   notifyTarget: INotifyTarget
   

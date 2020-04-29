@@ -1,7 +1,7 @@
 {
   "name": "@appgenerator/eventstream",
   "version": "0.0.1",
-  "description": "d",
+  "description": "Eventstream",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "repository": "",

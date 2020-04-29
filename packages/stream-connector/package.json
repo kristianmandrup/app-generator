@@ -1,0 +1,19 @@
+{
+  "name": "@appgenerator/stream-connector",
+  "version": "0.0.1",
+  "description": "Stream connector with plug and socket",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "repository": "",
+  "author": "appgenerator <appgenerator@gmail.com>",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "start": "tsc -w --preserveWatchOutput"
+  }
+}

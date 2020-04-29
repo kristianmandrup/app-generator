@@ -6,25 +6,25 @@ export class ItemErrorContainerDisplay {
     return []
   }
 
-  renderValue(): any {
-    return this.valueToDisplay
+  renderError(): any {
+    return this.errorToDisplay
   }
 
   render(): any {
     const { classNames } = this
     return {
       classNames,
-      value: this.renderValue() 
+      error: this.renderError() 
     }
   }
 }
 
 export class ItemErrorDisplay extends BaseView {
   subscriber: IEventSubscriber
-  value: any = null
+  error: any = null
 
-  get valueToDisplay(): any {
-    return this.value
+  get errorToDisplay(): any {
+    return this.error
   }
 
   injectContainerDisplay(containerDisplay: IListContainerDisplay) {
@@ -33,8 +33,8 @@ export class ItemErrorDisplay extends BaseView {
   }  
 
   injectSubscriber(subscriber: IEventSubscriber) {
-    subscriber.onNext = (value) => {
-      this.value = value
+    subscriber.onError = (error) => {
+      this.error = error
     }
     this.subscriber = subscriber;
   }  

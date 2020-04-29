@@ -1,0 +1,19 @@
+{
+  "name": "@appgenerator/connector",
+  "version": "0.0.1",
+  "description": "Connector with plug and socket",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "repository": "",
+  "author": "appgenerator <appgenerator@gmail.com>",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "start": "tsc -w --preserveWatchOutput"
+  }
+}

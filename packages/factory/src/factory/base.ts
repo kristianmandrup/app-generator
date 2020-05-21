@@ -1,32 +1,33 @@
-import { Schema } from '../schema';
-import { Registry } from '../../../registry/src/registry';
-import { IRegistry } from '../../../registry/src/types';
-import { MaterializedView } from '../../../materialized-views/src/materialized-view/index';
-import { registries } from './registries';
+import { Schema } from "../schema";
+import { Registry } from "../../../registry/src/registry";
+import { IRegistry } from "../../../registry/src/types";
+import { registries } from "./registries";
+import { IConnector } from "./connector/base";
 
 export class Factory {
-  registry: IRegistry
-  builder: IBuilder
-  connector: IConnector
+  name: string = "no name";
+  registry: IRegistry;
+  builder: IBuilder;
+  connector: IConnector;
 
   constructor(public schema: Schema) {
-    this.init()    
+    this.init();
   }
 
-  init() {
-    this.registry = new Registry(registries)    
+  init(name?: string = this.name) {
+    this.registry = new Registry(name, registries);
   }
 
   injectBuilder(builder: IBuilder) {
-    this.builder = builder
+    this.builder = builder;
   }
 
   injectConnector(connector: IConnector) {
-    this.connector = connector
+    this.connector = connector;
   }
 
   register(registry: Registry, name?: string) {
-    name = name || registry.name
-    this.registry.add(name, registry) 
+    name = name || registry.name;
+    this.registry.add(name, registry);
   }
 }

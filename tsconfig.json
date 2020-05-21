@@ -1,6 +1,13 @@
 {
-  "exclude": ["node_modules", "dist", "lib", "__tests__", "**/*.test*", "**/*.spec*"],
-  "files":  [],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "lib",
+    "__tests__",
+    "**/*.test*",
+    "**/*.spec*"
+  ],
+  "files": [],
   "compilerOptions": {
     "skipLibCheck": false,
     "target": "esnext",
@@ -15,6 +22,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
+    "noImplicitAny": false,
     "noFallthroughCasesInSwitch": true,
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
@@ -28,11 +36,15 @@
     "composite": true,
     "declaration": true,
     "declarationMap": true,
-    "sourceMap": true,
+    "sourceMap": true
   },
   "references": [
     { "path": "packages/views" },
     { "path": "packages/models" },
-    { "path": "packages/controllers" }
+    { "path": "packages/controllers" },
+    { "path": "packages/connector" },
+    { "path": "packages/entity" },
+    { "path": "packages/eventstream" },
+    { "path": "packages/factory" }
   ]
 }

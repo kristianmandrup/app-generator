@@ -39,12 +39,20 @@
     "sourceMap": true
   },
   "references": [
-    { "path": "packages/views" },
-    { "path": "packages/models" },
-    { "path": "packages/controllers" },
+    { "path": "packages/api" },
     { "path": "packages/connector" },
+    { "path": "packages/controllers" },
     { "path": "packages/entity" },
     { "path": "packages/eventstream" },
-    { "path": "packages/factory" }
+    { "path": "packages/factory" },
+    { "path": "packages/materialized-views" }, 
+    { "path": "packages/models" }, 
+    { "path": "packages/react-views" },
+    { "path": "packages/registry" },
+    { "path": "packages/rxjs-eventstream" },
+    { "path": "packages/state-machine" },
+    { "path": "packages/stores" },
+    { "path": "packages/stream-connector" }
+    { "path": "packages/views" }
   ]
 }

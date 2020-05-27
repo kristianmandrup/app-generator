@@ -1,5 +1,5 @@
 {
-  "name": "@appgenerator/views",
+  "name": "@appgenerator/react-views",
   "version": "0.0.1",
   "description": "",
   "main": "./lib/index.js",
@@ -18,9 +18,7 @@
     "react": "^16.8.0",
     "react-dom": "^16.8.0"
   },
-  "devDependencies": {
-    "@stereobooster/d": "*"
-  },
+  "devDependencies": {},
   "scripts": {
     "start": "tsc -w --preserveWatchOutput"
   }

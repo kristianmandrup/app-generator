@@ -11,11 +11,7 @@
     "build": "build-storybook -o dist",
     "clean": "rimraf tsconfig.tsbuildinfo lib dist"
   },
-  "dependencies": {
-    "@appgenerator/d": "*",
-    "@appgenerator/b": "*",
-    "@appgenerator/c": "*"
-  },
+  "dependencies": {},
   "peerDependencies": {
     "react": "^16.8.0",
     "react-dom": "^16.8.0"

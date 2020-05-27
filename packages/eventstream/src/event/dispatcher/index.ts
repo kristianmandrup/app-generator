@@ -1,19 +1,19 @@
-import { IEvent } from '../types';
-import { IEventStream } from '../../stream';
+import { IEvent } from "../types";
+import { IEventStream } from "../../stream";
 
 export class EventDispatcher {
-  store = {}
-  list = []
-  eventStream: IEventStream
+  store = {};
+  list: any[] = [];
+  name?: string;
 
   constructor(public eventStream: IEventStream, name?: string) {
-    this.name = name
+    this.name = name;
   }
 
-  dispatch(event: IEvent) {    
-    eventStream.dispatch(event)
-    this.list.push(event)
-    this.store[event.name] = this.store[event.name] || []
-    this.store[event.name].push(event)
+  dispatch(event: IEvent) {
+    this.eventStream.dispatch(event);
+    this.list.push(event);
+    this.store[event.name] = this.store[event.name] || [];
+    this.store[event.name].push(event);
   }
 }

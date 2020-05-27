@@ -13,6 +13,16 @@
   "files": [
     "lib"
   ],
+  "peerDependencies": {
+    "@appgenerator/eventstream": "0.0.1",
+    "@appgenerator/views": "0.0.1",
+    "@appgenerator/materialized-views": "0.0.1"
+  },
+  "devDependencies": {
+    "@appgenerator/eventstream": "*",
+    "@appgenerator/views": "*",
+    "@appgenerator/materialized-views": "*"
+  },
   "scripts": {
     "start": "tsc -w --preserveWatchOutput"
   }

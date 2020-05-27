@@ -1,32 +1,35 @@
-import { IEntityController } from '../../controllers/entity/controller/types';
-import { IEventDispatcher } from '../../../../eventstream/src/event/dispatcher/index';
-import { IListDisplay } from '../../../../views/src/display/types';
+import { IEntityController } from "../../controllers/entity/controller/types";
+import { IRegistry } from "@appgenerator/api";
+import { IEventDispatcher } from "@appgenerator/eventstream";
+import { IListDisplay } from "@appgenerator/views";
+import { IMaterializedView } from "@appgenerator/materialized-views";
 
 export interface IEntityView {
-  render(): any
+  render(): any;
 }
 
 export class EntityView {
-  controller: IEntityController
-  view: IListDisplay
-  dispatcher: IEventDispatcher
+  controller?: IEntityController;
+  view?: IListDisplay;
+  dispatcher?: IEventDispatcher;
+  registry?: IRegistry;
+  materializedView?: IMaterializedView;
 
-  constructor(public name: string) {
-  }
+  constructor(public name: string) {}
 
   injectRegistry(registry: IRegistry) {
-    this.registry = registry
+    this.registry = registry;
   }
 
-  injectMaterializedView(materializedView: IEntityController) {
-    this.materializedView = materializedView
+  injectMaterializedView(materializedView: IMaterializedView) {
+    this.materializedView = materializedView;
   }
 
   injectController(controller: IEntityController) {
-    this.controller = controller
+    this.controller = controller;
   }
 
   injectDispatcher(dispatcher: IEventDispatcher) {
-    this.dispatcher = dispatcher
+    this.dispatcher = dispatcher;
   }
 }

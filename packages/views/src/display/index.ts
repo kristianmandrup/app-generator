@@ -1,7 +1,8 @@
 import * as list from "./list";
-import * item from "./item";
+import * as item from "./item";
+export * from "./types";
 
 export const display = {
   list,
-  item
-}
+  item,
+};

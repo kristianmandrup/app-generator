@@ -1,8 +1,9 @@
 import * as display from "./display";
-import * input from "./input";
+import * as input from "./input";
+export * from "./display";
+export * from "./input";
 
 export const views = {
   display,
-  input
-}
-
+  input,
+};

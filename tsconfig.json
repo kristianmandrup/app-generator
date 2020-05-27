@@ -45,14 +45,14 @@
     { "path": "packages/entity" },
     { "path": "packages/eventstream" },
     { "path": "packages/factory" },
-    { "path": "packages/materialized-views" }, 
-    { "path": "packages/models" }, 
+    { "path": "packages/materialized-views" },
+    { "path": "packages/models" },
     { "path": "packages/react-views" },
     { "path": "packages/registry" },
     { "path": "packages/rxjs-eventstream" },
     { "path": "packages/state-machine" },
     { "path": "packages/stores" },
-    { "path": "packages/stream-connector" }
+    { "path": "packages/stream-connector" },
     { "path": "packages/views" }
   ]
 }

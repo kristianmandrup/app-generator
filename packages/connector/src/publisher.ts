@@ -1,21 +1,28 @@
-import { IIOConnector } from './io-connector';
+import { IIOConnector } from "./io-connector";
 
 export interface IPublisher {
-  publish(data: any)
+  publish(data: any);
 }
 
-export class Publisher implements IPublishable {
-  publishTarget: IPublishable
+export interface IPublishable {
+  // subscribe(publisher: IPublisher);
+  publish(data: any);
+}
+
+export class Publisher implements IPublisher {
+  publishTarget?: IPublishable;
+  connector?: IIOConnector;
 
   injectPublishTarget(target: IPublishable) {
-    this.publishTarget = target
+    this.publishTarget = target;
   }
 
   injectConnector(connector: IIOConnector) {
-    this.injectPublishTarget(target)
+    this.connector = connector;
   }
 
   publish(data: any) {
-    this.publishTarget.publish(data)
+    if (!this.publishTarget) return;
+    this.publishTarget.publish(data);
   }
 }

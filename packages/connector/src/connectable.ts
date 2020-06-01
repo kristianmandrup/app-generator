@@ -63,6 +63,8 @@ export class Connectable implements IConnectable {
   }
 
   clear() {
+    if (!this.publisher) return;
+    this.publisher.clear();
     this.publisher = undefined;
   }
 }

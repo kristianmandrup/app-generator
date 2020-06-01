@@ -29,6 +29,7 @@ describe("Connectable", () => {
 
   describe("publish", () => {
     connectable.injectPublisher(publisher);
+    publisher.publish(data);
 
     describe("no subcriber", () => {
       it("ignored", () => {

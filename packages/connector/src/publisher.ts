@@ -12,6 +12,7 @@ export interface IPublisher {
   publish(data: any);
   hasSubscriber(subscriber: ISubscriber | string);
   subscribe(subscriber, name?: string);
+  clear();
 }
 
 export class Publisher implements IPublisher {
@@ -55,5 +56,10 @@ export class Publisher implements IPublisher {
   subscribe(subscriber, name?: string) {
     const $name: string = name || subscriber.name;
     this.subscribers[$name] = subscriber;
+  }
+
+  clear() {
+    this.subscribers = {};
+    this.latest = {};
   }
 }

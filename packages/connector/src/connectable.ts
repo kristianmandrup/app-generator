@@ -1,4 +1,4 @@
-import { IPublisher } from "./publisher";
+import { IPublisher, ILatest } from "./publisher";
 import { INotifier } from "./notifier";
 import { ISubscriber } from "./subscriber";
 
@@ -10,6 +10,7 @@ export interface IConnectableInjectParams {
 export interface IConnectable extends IPublisher {
   name: string;
   publisher?: IPublisher;
+  latest: ILatest;
 
   notify(data: any);
   notifyError(error: any);

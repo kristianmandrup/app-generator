@@ -5,6 +5,7 @@ import { INotifier } from "./notifier";
 export interface IIOSocket extends IIOConnectorPart {
   type: string;
   accept(plug: IIOPlug);
+  notify(data: any);
 }
 
 export class IOSocket extends IOConnectorPart {
@@ -19,5 +20,9 @@ export class IOSocket extends IOConnectorPart {
     this.checkCompatibility(plug);
     this.plug = plug;
     plug.plugInto(this);
+  }
+
+  notify(data: any) {
+    this.plug?.notify(data);
   }
 }

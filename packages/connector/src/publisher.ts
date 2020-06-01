@@ -1,8 +1,10 @@
 import { IIOConnector } from "./io-connector";
 import { ISubscriber } from "./subscriber";
 
-type ILatest = {
+export type ILatest = {
   ignored?: any;
+  data?: any;
+  error?: any;
   published?: any;
 };
 

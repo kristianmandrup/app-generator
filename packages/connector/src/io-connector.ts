@@ -1,8 +1,8 @@
 import { IIOPlug, IOPlug } from "./io-plug";
 import { IIOSocket, IOSocket } from "./io-socket";
 import { IStoreCommander } from "@appgenerator/stores";
-import { IPublisher } from "./publisher";
-import { INotifier } from "./notifier";
+import { Connectable } from "./connectable";
+import { ILatest } from "./publisher";
 
 export interface IPlugMap {
   [key: string]: IIOPlug;
@@ -14,7 +14,13 @@ export interface ISocketMap {
 
 export interface IIOConnector {
   type: string;
-  latest: ILatestData;
+  latest: ILatest;
+
+  socketNames: string[];
+  sockets: IIOSocket[];
+  plugNames: string[];
+  plugs: IIOPlug[];
+
   add({ socketName, plugName }: IOConnectorAddParams);
   addSocket(socket: IOSocket);
   addPlug(plug: IOPlug);
@@ -28,15 +34,8 @@ export interface IIOConnector {
   plugNamed(name: string);
   socketNamed(name: string);
 
-  socketNames: string[];
-  sockets: IIOSocket[];
-  plugNames: string[];
-  plugs: IIOPlug[];
-}
-
-export interface ILatestData {
-  value: any;
-  error: any;
+  notify(data: any);
+  notifyError(error: any);
 }
 
 export interface IOConnectorAddParams {
@@ -44,8 +43,7 @@ export interface IOConnectorAddParams {
   plugName: string;
 }
 
-export class IOConnector implements IPublisher, INotifier {
-  name: string;
+export class IOConnector extends Connectable {
   plugMap: IPlugMap = {};
   socketMap: ISocketMap = {};
 
@@ -53,19 +51,11 @@ export class IOConnector implements IPublisher, INotifier {
   publishStore?: IStoreCommander;
   type: string = "default";
 
-  latest: ILatestData = {
-    value: null,
-    error: null,
-  };
-
   constructor(name: string) {
-    this.name = name;
+    super(name);
   }
 
-  subscribe(subscriber, name?: string) {
-    // const $name: string = name || subscriber.name;
-    // this.subscribers[$name] = subscriber;
-  }
+  subscribe(_subscriber, _name?: string) {}
 
   notify(data: any) {
     this.storeNotifyData(data);
@@ -77,10 +67,12 @@ export class IOConnector implements IPublisher, INotifier {
   }
 
   storeNotifyData(data: any) {
+    if (!this.notifyStore) return;
     this.notifyStore.update(data);
   }
 
   storePublishData(data: any) {
+    if (!this.publishStore) return;
     this.publishStore.update(data);
   }
 
@@ -95,10 +87,10 @@ export class IOConnector implements IPublisher, INotifier {
 
   notifyError(error: any): any {
     const sockets = this.socketsAccepting(error);
-    this.notifyAll(sockets, data);
+    this.notifyAll(sockets, error);
   }
 
-  socketsAccepting(data: any) {
+  socketsAccepting(_data: any) {
     return [];
   }
 

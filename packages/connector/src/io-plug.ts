@@ -4,6 +4,8 @@ import { IIOConnectorPart, IOConnectorPart } from "./connector-part";
 export interface IIOPlug extends IIOConnectorPart {
   socket: IIOSocket;
   plugInto(socket: IIOSocket);
+  notify(data: any);
+  notifyError(error: any);
 }
 
 export class IOPlug extends IOConnectorPart implements IIOPlug {
@@ -18,10 +20,10 @@ export class IOPlug extends IOConnectorPart implements IIOPlug {
     return this.connector && this.connector.latest;
   }
 
-  onNext = (value: any) => {
+  onNext = (data: any) => {
     if (!this.latest) return;
-    this.latest.value = value;
-    this.notify(value);
+    this.latest.data = data;
+    this.notify(data);
   };
 
   onError = (error: any) => {
@@ -31,12 +33,14 @@ export class IOPlug extends IOConnectorPart implements IIOPlug {
   };
 
   notify(data: any): any {
-    // this.socket.notify(data);
-    // this.connector.notify(data);
+    this.socket.notify(data);
+    if (!this.connector) return;
+    this.connector.notify(data);
   }
 
   notifyError(error: any): any {
-    // this.connector.notifyError(error);
+    if (!this.connector) return;
+    this.connector.notifyError(error);
   }
 
   plugInto(socket: IIOSocket) {

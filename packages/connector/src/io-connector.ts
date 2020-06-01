@@ -45,17 +45,27 @@ export interface IOConnectorAddParams {
 }
 
 export class IOConnector implements IPublisher, INotifier {
-  plugMap: IPlugMap;
-  socketMap: ISocketMap;
+  name: string;
+  plugMap: IPlugMap = {};
+  socketMap: ISocketMap = {};
 
-  notifyStore: IStoreCommander;
-  publishStore: IStoreCommander;
-  type: string;
+  notifyStore?: IStoreCommander;
+  publishStore?: IStoreCommander;
+  type: string = "default";
 
   latest: ILatestData = {
     value: null,
     error: null,
   };
+
+  constructor(name: string) {
+    this.name = name;
+  }
+
+  subscribe(subscriber, name?: string) {
+    // const $name: string = name || subscriber.name;
+    // this.subscribers[$name] = subscriber;
+  }
 
   notify(data: any) {
     this.storeNotifyData(data);

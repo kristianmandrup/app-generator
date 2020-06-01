@@ -2,7 +2,8 @@ import { IIOConnector } from "./io-connector";
 
 export interface IIOConnectorPart {
   name: string;
-  connector: IIOConnector;
+  type: string;
+  connector?: IIOConnector;
 }
 
 export class IOConnectorPart {
@@ -15,11 +16,11 @@ export class IOConnectorPart {
     this.partOf(connector);
   }
 
-  isCompatible(part: IOConnectorPart) {
+  isCompatible(part: IIOConnectorPart) {
     return part.type === this.type;
   }
 
-  checkCompatibility(part: IOConnectorPart) {
+  checkCompatibility(part: IIOConnectorPart) {
     if (!this.isCompatible(part)) {
       throw new Error("Incompatible connector parts");
     }

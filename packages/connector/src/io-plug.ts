@@ -15,15 +15,17 @@ export class IOPlug extends IOConnectorPart implements IIOPlug {
   }
 
   get latest() {
-    return this.connector.latest;
+    return this.connector && this.connector.latest;
   }
 
   onNext = (value: any) => {
+    if (!this.latest) return;
     this.latest.value = value;
     this.notify(value);
   };
 
   onError = (error: any) => {
+    if (!this.latest) return;
     this.latest.error = error;
     this.notifyError(error);
   };

@@ -1,13 +1,15 @@
-import { IEvent } from '../event/types';
-import { IEventStream } from '../../stream';
+import { IEvent } from "../types";
+import { IEventStream } from "../../stream";
 
 export class EventPublisher {
+  eventStream?: IEventStream;
 
   to(eventStream: IEventStream) {
-    this.eventStream = eventStream
+    this.eventStream = eventStream;
   }
 
   publish(event: IEvent) {
-    this.eventStream.publish(event)
+    if (!this.eventStream) return;
+    this.eventStream.onEvent(event);
   }
 }

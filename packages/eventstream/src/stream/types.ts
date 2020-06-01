@@ -5,4 +5,5 @@ export interface IEventStream {
   named(name: string);
   unsubscribe(subscriber: string | IEventSubscriber);
   dispatch(event);
+  onEvent(event);
 }

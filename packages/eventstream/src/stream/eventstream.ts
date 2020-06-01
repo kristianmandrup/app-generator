@@ -27,4 +27,6 @@ export class EventStream {
     const name = this.subscriberName(subscriber);
     delete this.subscribers[name];
   }
+
+  onEvent(_event) {}
 }

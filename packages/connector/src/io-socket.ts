@@ -8,8 +8,8 @@ export interface IIOSocket extends IIOConnectorPart {
 }
 
 export class IOSocket extends IOConnectorPart {
-  plug: IIOPlug;
-  notifier: INotifier;
+  plug?: IIOPlug;
+  notifier?: INotifier;
 
   injectNotifier(notifier: INotifier) {
     this.notifier = notifier;

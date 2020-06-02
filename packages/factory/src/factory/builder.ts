@@ -1,5 +1,5 @@
 import { ISchema } from "../types";
-import { IRegistry, Registry } from "@appgenerator/registry";
+import { IRegistry, Registry, IRegistryMap } from "@appgenerator/registry";
 
 type BuilderArgs = {
   schema?: ISchema;
@@ -39,9 +39,38 @@ export class Builder {
   }
 
   buildAll(): any {
-    // const { factories, schema } = this;
-    // const names = factories.keys;
-    // return names.map(this.buildNamed);
+    return {
+      ...this.rootBuild(),
+    };
+  }
+
+  registryMapBuild(registryMap: IRegistryMap) {
+    return Object.keys(registryMap).reduce((acc, name) => {
+      const registry = registryMap[name];
+      acc[name] = this.registryBuild(registry);
+      return acc;
+    }, {});
+  }
+
+  rootBuild() {
+    const { factories } = this;
+    if (!factories) return {};
+    return this.registryBuild(factories);
+  }
+
+  registryBuild(registry: IRegistry) {
+    const { entryMap, name } = registry;
+    return {
+      [name]: this.entryMapBuild(entryMap),
+      ...this.registryMapBuild(registry.registryMap),
+    };
+  }
+
+  entryMapBuild(entryMap: any = {}) {
+    return Object.keys(entryMap).reduce((acc, name) => {
+      acc[name] = this.buildNamed(name);
+      return acc;
+    }, {});
   }
 
   buildNamed = (path: string, name: string = "default") => {
@@ -54,7 +83,7 @@ export class Builder {
     // such as services
     const entities = schema.entities();
     entities.map((entity) => {
-      const instance = factory.create(entity);
+      const instance = this.buildInstance(factory, entity);
       const registry = built.atPath(path);
       if (registry) {
         registry.addEntry({ instance, entity });
@@ -62,4 +91,13 @@ export class Builder {
     });
     return built;
   };
+
+  buildInstance(factory, entity) {
+    const $factory = factory.create ? factory.create : factory;
+    if (typeof factory !== "function") {
+      console.error({ factory });
+      throw new Error("Invalid factory - must be a function");
+    }
+    return $factory(entity);
+  }
 }

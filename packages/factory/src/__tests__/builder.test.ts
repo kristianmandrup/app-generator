@@ -1,4 +1,5 @@
 import { Builder } from "../factory";
+import { Registry } from "../../../registry/src/Registry";
 
 describe("Builder", () => {
   const name = "app";
@@ -24,6 +25,62 @@ describe("Builder", () => {
 
   it("creates named builder", () => {
     expect(builder.name).toEqual(name);
+  });
+
+  describe("build", () => {
+    builder.setSchema(schema);
+    const built = builder.build();
+    const expected = {};
+    it("was built", () => {
+      expect(built).toEqual(expected);
+    });
+  });
+
+  describe("buildAll", () => {
+    builder.setSchema(schema);
+    const built = builder.buildAll();
+    const expected = {};
+    it("was built", () => {
+      expect(built).toEqual(expected);
+    });
+  });
+
+  describe("rootBuild", () => {
+    builder.setSchema(schema);
+    const built = builder.rootBuild();
+    const expected = {};
+    it("was built", () => {
+      expect(built).toEqual(expected);
+    });
+  });
+
+  describe("registryBuild", () => {
+    builder.setSchema(schema);
+    const models = new Registry("models");
+    models.addEntryMap({
+      dev: createEntityModel,
+    });
+    const built = builder.registryBuild(models);
+    const expected = {};
+    it("was built", () => {
+      expect(built).toEqual(expected);
+    });
+  });
+
+  describe("registryMapBuild", () => {
+    builder.setSchema(schema);
+    const models = new Registry("models");
+    models.addEntryMap({
+      dev: createEntityModel,
+    });
+    const registryMap = {
+      models,
+    };
+    const built = builder.registryMapBuild(registryMap);
+    const expected = {};
+    it("was built", () => {
+      expect(built).toEqual(expected);
+    });
   });
 
   describe("buildNamed", () => {

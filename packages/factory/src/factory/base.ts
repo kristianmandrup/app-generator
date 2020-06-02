@@ -10,7 +10,8 @@ export class Factory {
   builder?: IBuilder;
   connector?: IConnector;
 
-  constructor(public schema: Schema) {
+  constructor(name: string, public schema: Schema) {
+    this.name = name;
     this.init();
   }
 

@@ -31,7 +31,7 @@ const apis = {
   item: api(),
 };
 
-const actions = [];
+const actions: any[] = [];
 
 const entity = {
   actions,

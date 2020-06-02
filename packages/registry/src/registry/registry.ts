@@ -1,59 +1,81 @@
-import { IRegistry } from "../types";
+import { IRegistry, IFactoryMap, IRegistryMap } from "../types";
 import { IFactory } from "@appgenerator/factory";
-
-type IRegistryMap = {
-  [key: string]: IRegistry;
-};
-
-type IFactoryMap = {
-  [key: string]: IFactory;
-};
 
 export class Registry implements IRegistry {
   name: string;
   store: IFactoryMap = {};
-  // registry: IRegistry = this.createRegistry();
+  registries: IRegistryMap = {};
 
-  constructor(name: string, registries: IRegistryMap = {}) {
+  constructor(name: string, registries: any = {}) {
     this.name = name;
     this.registerMap(registries);
     this.init();
   }
 
-  build(): any[] {
+  build() {
+    return {
+      factories: this.buildFromFactories(),
+      registries: this.buildFromNestedRegistries(),
+    };
+  }
+
+  buildFromFactories(): any[] {
     return this.factoryList.map((factory) => factory.build());
+  }
+
+  buildFromNestedRegistries(): any[] {
+    return this.registriesList.map((registry) => registry.build());
   }
 
   get factoryList() {
     return Object.values(this.store);
   }
 
-  init() {
-    // this.registry = this.registry || this.createRegistry();
+  get registriesList() {
+    return Object.values(this.registries);
   }
+
+  init() {}
 
   createRegistry(name: string = "unknown"): IRegistry {
     return new Registry(name);
   }
 
-  add(factory: IFactory, name?: string) {
+  addFactory(factory: IFactory, name?: string) {
     this.init();
     name = name || factory.name;
     this.store[name] = factory;
   }
 
-  named(name: string): IFactory {
+  addRegistry(registry: IRegistry, name?: string) {
+    this.init();
+    name = name || registry.name;
+    this.registries[name] = registry;
+  }
+
+  addFactoryMap(factoryMap: any) {
+    this.init();
+    Object.entries(factoryMap).map(([name, entry]) => {
+      if ((entry as any).name) {
+        this.addFactory(entry as IFactory, name);
+      } else {
+        const registry = new Registry(name, entry);
+        this.addRegistry(registry);
+      }
+    });
+  }
+
+  factoryNamed(name: string): IFactory {
     return this.store[name];
   }
 
-  register(registry: Registry, name?: string) {
-    name = name || registry.name;
-    // this.registry.add(name, registry);
+  registryNamed(name: string): IFactory {
+    return this.store[name];
   }
 
-  registerMap(registries: IRegistryMap) {
-    Object.entries(registries).map(([name, registry]) => {
-      // this.add(registry, name);
+  registerMap(factoryMap: any) {
+    Object.values(factoryMap).map((registry) => {
+      this.addFactoryMap(registry);
     });
   }
 }

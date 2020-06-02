@@ -23,6 +23,11 @@ export class SchemaEntity {
 }
 
 export class Schema {
+  schema: any;
+  constructor(schema: any) {
+    this.schema = schema;
+  }
+
   entities(query?: any): SchemaEntity[] {
     return [];
   }

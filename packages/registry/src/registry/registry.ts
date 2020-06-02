@@ -12,7 +12,7 @@ type IFactoryMap = {
 export class Registry implements IRegistry {
   name: string;
   store: IFactoryMap = {};
-  registry: IRegistry = this.createRegistry();
+  // registry: IRegistry = this.createRegistry();
 
   constructor(name: string, registries: IRegistryMap = {}) {
     this.name = name;
@@ -29,7 +29,7 @@ export class Registry implements IRegistry {
   }
 
   init() {
-    this.registry = this.registry || this.createRegistry();
+    // this.registry = this.registry || this.createRegistry();
   }
 
   createRegistry(name: string = "unknown"): IRegistry {

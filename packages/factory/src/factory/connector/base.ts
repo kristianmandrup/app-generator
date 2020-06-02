@@ -1,7 +1,7 @@
 export interface IConnector {
-  connect()
+  connect();
 }
 
 export class Connector implements IConnector {
-  connect()
+  connect() {}
 }

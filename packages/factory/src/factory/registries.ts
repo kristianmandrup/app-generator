@@ -1,35 +1,37 @@
 const display = () => ({
   list: {},
-  item: {} 
-})
+  item: {},
+});
 
-const input = display
+const input = display;
 
 const create = () => ({
   display: display(),
-  input: input()
-})
+  input: input(),
+});
 
-const models = create()
+const models = create();
 
 const ui = {
   views: create(),
-  actions: create()
-}
+  actions: create(),
+};
 
-const controllers = create()      
+const controllers = create();
 
-const services = input()
+const services = input();
 
 const api = () => ({
   queries: {},
-  mutators: {}  
-})
+  mutators: {},
+});
 
 const apis = {
   list: api(),
-  item: api()
-}
+  item: api(),
+};
+
+const actions = [];
 
 const entity = {
   actions,
@@ -37,17 +39,17 @@ const entity = {
   ui, // views, actions
   controllers,
   services,
-  apis
-}
+  apis,
+};
 
 const infra = {
   eventstreams: {},
   materializedViews: {},
   mvListeners: {},
-  selectors: {}
-}
+  selectors: {},
+};
 
 export const registries = {
   entity,
-  infra
-}
+  infra,
+};

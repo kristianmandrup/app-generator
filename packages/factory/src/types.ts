@@ -1,5 +1,9 @@
-import { Schema } from "./schema";
+import { Schema, SchemaEntity } from "./schema";
 import { IRegistry } from "@appgenerator/registry";
+
+export interface ISchema {
+  entities(query?: any): SchemaEntity[];
+}
 
 export interface IFactory {
   name: string;

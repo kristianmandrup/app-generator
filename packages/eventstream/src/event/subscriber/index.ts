@@ -4,6 +4,10 @@ import { IEventError, IEventSubscriber, IEvent } from "../types";
 export class EventSubscriber implements IEventSubscriber {
   constructor(public name: string) {}
 
+  isIdentical(subscriber: IEventSubscriber): boolean {
+    return this === subscriber || this.name === subscriber.name;
+  }
+
   subscribeTo(eventStream: IEventStream) {
     eventStream.subscribe(this);
   }

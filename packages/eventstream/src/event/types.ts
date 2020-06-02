@@ -2,6 +2,7 @@ import { IEventStream } from "../stream";
 
 export interface IEventSubscriber {
   name: string;
+  isIdentical(subscriber: IEventSubscriber): boolean;
   subscribeTo(eventStream: IEventStream);
   unsubscribeFrom(eventStream: IEventStream);
   onEvent(event: IEvent);

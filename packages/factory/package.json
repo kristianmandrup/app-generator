@@ -15,5 +15,11 @@
   ],
   "scripts": {
     "start": "tsc -w --preserveWatchOutput"
+  },
+  "peerDependencies": {
+    "@appgenerator/registry": "0.0.1"
+  },
+  "devDependencies": {
+    "@appgenerator/registry": "*"
   }
 }

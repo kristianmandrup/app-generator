@@ -1,32 +1,26 @@
-import { views } from '../../../views/src';
-import { controllers } from '../../../controllers/src/index';
-import { models } from '../../../models/src/index';
+import { views } from "@appgenerator/views";
+import { controllers } from "@appgenerator/controllers";
+import { models } from "@appgenerator/models";
 
 const $baseMap = {
-  views, 
-  controllers
-}
+  views,
+  controllers,
+};
 
 export class BaseMapBuilder {
-  constructor(public factoryRegistry: any){
-  }
+  constructor(public factoryRegistry: any) {}
 
   build(baseMap = {}) {
-    const { factoryRegistry } = this
+    const { factoryRegistry } = this;
     baseMap = {
       ...$baseMap,
       ...baseMap,
-    }
-    const baseMapNames = Object.keys(baseMap)
-    baseMapNames.map(name => {
-      registry = baseMap[name]
-      factoryRegistry[name] = registry
-    })    
-    return factoryRegistry
+    };
+    const baseMapNames = Object.keys(baseMap);
+    baseMapNames.map((name) => {
+      registry = baseMap[name];
+      factoryRegistry[name] = registry;
+    });
+    return factoryRegistry;
   }
 }
-
-
-
-
-

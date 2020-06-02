@@ -1,9 +1,14 @@
-import { IEventDispatcher } from '../../../../eventstream/src/event/dispatcher/index';
+import { IEventDispatcher, IEvent } from "@appgenerator/eventstream";
 
 export class BaseController {
-  dispatcher: IEventDispatcher
+  dispatcher?: IEventDispatcher;
 
   injectDispatcher(dispatcher: IEventDispatcher) {
-    this.dispatcher = dispatcher
+    this.dispatcher = dispatcher;
+  }
+
+  dispatch(event: IEvent) {
+    if (!this.dispatcher) return;
+    this.dispatcher.dispatch(event);
   }
 }

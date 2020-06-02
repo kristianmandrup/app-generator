@@ -1,13 +1,23 @@
 import { IRegistry } from "../types";
+import { IFactory } from "@appgenerator/factory";
+
+type IRegistryMap = {
+  [key: string]: IRegistry;
+};
+
+type IFactoryMap = {
+  [key: string]: IFactory;
+};
 
 export class Registry implements IRegistry {
-  name: string
-  store = {};
+  name: string;
+  store: IFactoryMap = {};
   registry: IRegistry = this.createRegistry();
 
-  constructor(name?: string, registries: any = {}) {
+  constructor(name: string, registries: IRegistryMap = {}) {
     this.name = name;
-    this.init()
+    this.registerMap(registries);
+    this.init();
   }
 
   build(): any[] {
@@ -19,11 +29,11 @@ export class Registry implements IRegistry {
   }
 
   init() {
-    this.registry = this.registry || this.createRegistry()
+    this.registry = this.registry || this.createRegistry();
   }
 
-  createRegistry(): IRegistry {
-    return new Registry();
+  createRegistry(name: string = "unknown"): IRegistry {
+    return new Registry(name);
   }
 
   add(factory: IFactory, name?: string) {
@@ -38,12 +48,12 @@ export class Registry implements IRegistry {
 
   register(registry: Registry, name?: string) {
     name = name || registry.name;
-    this.registry.add(name, registry);
+    // this.registry.add(name, registry);
   }
 
-  registerMap(registries: any) {
+  registerMap(registries: IRegistryMap) {
     Object.entries(registries).map(([name, registry]) => {
-      this.add(registry, name);  
-    }
+      // this.add(registry, name);
+    });
   }
 }

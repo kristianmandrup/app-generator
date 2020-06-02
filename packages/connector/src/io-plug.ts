@@ -11,7 +11,7 @@ export interface IIOPlug extends IIOConnectorPart {
 export class IOPlug extends IOConnectorPart implements IIOPlug {
   socket: IIOSocket;
 
-  constructor(opts: any) {
+  constructor(opts: any = {}) {
     super(opts);
     this.socket = opts.socket;
   }

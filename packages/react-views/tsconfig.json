@@ -4,6 +4,10 @@
   "compilerOptions": {
     "outDir": "lib",
     "rootDir": "src",
-    "baseUrl": ".",
-  }
+    "baseUrl": "."
+  },
+  "references": [
+    { "path": "../eventstream" },
+    { "path": "../materialized-views" }
+  ]
 }

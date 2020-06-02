@@ -1,20 +1,20 @@
 import { Schema } from "../schema";
-import { Registry } from "../../../registry/src/registry";
-import { IRegistry } from "../../../registry/src/types";
+import { IRegistry, Registry } from "@appgenerator/registry";
 import { registries } from "./registries";
 import { IConnector } from "./connector/base";
+import { IBuilder } from "../types";
 
 export class Factory {
   name: string = "no name";
-  registry: IRegistry;
-  builder: IBuilder;
-  connector: IConnector;
+  registry?: IRegistry;
+  builder?: IBuilder;
+  connector?: IConnector;
 
   constructor(public schema: Schema) {
     this.init();
   }
 
-  init(name?: string = this.name) {
+  init(name: string = this.name) {
     this.registry = new Registry(name, registries);
   }
 
@@ -28,6 +28,7 @@ export class Factory {
 
   register(registry: Registry, name?: string) {
     name = name || registry.name;
-    this.registry.add(name, registry);
+    if (!this.registry) return;
+    // this.registry.add(name, registry);
   }
 }

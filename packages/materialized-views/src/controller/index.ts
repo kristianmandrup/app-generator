@@ -1,41 +1,38 @@
-import { IEvent } from '../../../eventstream/src/event/types';
-
-interface IEventListener {
-  notify(event: IEvent)
-}
+import { IEvent, IEventSubscriber } from "@appgenerator/eventstream";
+import { IStore } from "@appgenerator/stores";
 
 export class MVController {
-  store = {}
-  subscribers = {}
-  listeners = {}
+  store?: IStore;
+  subscribers = {};
+  listeners = {};
 
-  constructor(public name: string) {    
+  constructor(public name: string) {}
+
+  subscribeWith(subscriber: IEventSubscriber, name?: string) {
+    subscriber.onEvent = this.onEvent;
+    name = name || subscriber.name;
+    this.subscribers[name] = subscriber;
   }
 
-  subscribeWith(subscriber: IEventSubscriber, name?: string) {    
-    subscriber.onEvent = this.onEvent
-    name = name || subscriber.name
-    this.subscribers[name] = subscriber
+  onEvent(event: IEvent) {
+    this.updateStore(event);
+    this.notifyAll();
   }
 
-  addListener(listener: IEventListener, name?: string) {
-    name = name || listener.name
-    this.listeners[name] = listener
-  }
-
-  onEvent(event) {
-    this.updateStore(event)
-    this.notifyAll()
+  get subscriberList() {
+    return Object.values(this.subscriberList);
   }
 
   notifyAll() {
-    this.listeners.map(listener => listener.notify(this.data))
+    this.subscriberList.map((subscriber) => subscriber.notify(this.data));
   }
 
-  updateStore(event) {    
+  updateStore(event: IEvent) {
+    if (!this.store) return;
+    this.store.update(event);
   }
 
   get data(): any {
-    return this.store
+    return this.store;
   }
 }

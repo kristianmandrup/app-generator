@@ -1,28 +1,27 @@
-import { IEventDispatcher } from '../../../../eventstream/src/event/dispatcher/index';
-import { IMaterializedView } from '../../../materialized-views/src/types';
-import { IEventSubscriber } from '../../../eventstream/src/event/subscriber/index';
+import { IEventSubscriberm, IEventDispatcher } from "@appgenerator/eventstream";
+import { IMaterializedView } from "@appgenerator/materialized-views";
 
 export class BaseView implements IEventSubscriber {
-  dispatcher: IEventDispatcher
+  dispatcher: IEventDispatcher;
 
   // TODO: generalize
   listen(materializedView: IMaterializedView, name?: string) {
-    materializedView.addListener(this)
+    materializedView.addListener(this);
   }
 
   notify(data: any): any {
-    return data;    
+    return data;
   }
 
   injectDispatcher(dispatcher: IEventDispatcher) {
-    this.dispatcher = dispatcher
+    this.dispatcher = dispatcher;
   }
 
   dispatch(event: IEvent) {
-    this.dispatcher.dispatch(event)
+    this.dispatcher.dispatch(event);
   }
 
   render(): any {
-    return null
+    return null;
   }
 }

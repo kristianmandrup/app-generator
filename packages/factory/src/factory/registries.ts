@@ -26,9 +26,14 @@ const api = () => ({
   mutators: {},
 });
 
-const apis = {
+const apiMap = () => ({
   list: api(),
   item: api(),
+});
+
+const apis = {
+  display: apiMap(),
+  input: apiMap(),
 };
 
 const actions: any[] = [];
@@ -45,7 +50,6 @@ const entity = {
 const infra = {
   eventstreams: {},
   materializedViews: {},
-  mvListeners: {},
   selectors: {},
 };
 

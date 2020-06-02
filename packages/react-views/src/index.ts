@@ -1,7 +1,11 @@
 import * as display from "./display";
-import * input from "./input";
+import * as input from "./input";
+
+export const actions = {
+  list: "list",
+};
 
 export const views = {
   display,
-  input
-}
+  input,
+};

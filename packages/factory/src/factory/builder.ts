@@ -1,6 +1,13 @@
 import { ISchema } from "../types";
 import { IRegistry, Registry, IRegistryMap } from "@appgenerator/registry";
 
+type IBuildMap = {
+  path: string;
+  registry: IRegistry;
+  instance: any;
+  entity: any;
+};
+
 type BuilderArgs = {
   schema?: ISchema;
   factories?: IRegistry;
@@ -73,24 +80,27 @@ export class Builder {
     }, {});
   }
 
-  buildNamed = (path: string, name: string = "default") => {
+  buildNamed = (path: string, name: string = "default"): IBuildMap[] => {
     const { factories, schema, built } = this;
-    if (!factories) return;
-    if (!built) return;
+    if (!factories) return [];
+    if (!built) return [];
     const factoryMap = factories.mapAtPath(path);
     const factory = factoryMap[name];
 
     // such as services
     const entities = schema.entities();
-    entities.map((entity) => {
+    return entities.map((entity) => {
       const instance = this.buildInstance(factory, entity);
       const registry = built.atPath(path);
-      if (registry) {
-        registry.addEntry({ instance, entity });
-      }
+      return { path, registry, instance, entity };
     });
-    return built;
   };
+
+  registerBuilt({ registry, instance, entity }: IBuildMap) {
+    if (registry) {
+      registry.addEntry({ instance, entity });
+    }
+  }
 
   buildInstance(factory, entity) {
     const $factory = factory.create ? factory.create : factory;

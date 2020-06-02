@@ -5,5 +5,9 @@
     "outDir": "lib",
     "rootDir": "src"
   },
-  "references": [{ "path": "../factory" }]
+  "references": [
+    { "path": "../react-views" },
+    { "path": "../controllers" },
+    { "path": "../models" }
+  ]
 }

@@ -1,4 +1,3 @@
-import { EventSubscriber as _EventSubscriber } from '../../../../eventstream/src/event/subscriber/index';
+import { EventSubscriber as _EventSubscriber } from "@appgenerator/eventstream";
 
-export class EventSubscriber implements _EventSubscriber {
-}
+export class EventSubscriber extends _EventSubscriber {}

@@ -1,4 +1,3 @@
-import { EventPublisher as _EventPublisher } from '../../../../eventstream/src/event/publisher';
+import { EventPublisher as _EventPublisher } from "@appgenerator/eventstream";
 
-export class EventPublisher extends _EventPublisher {
-}
+export class EventPublisher extends _EventPublisher {}

@@ -1,4 +1,3 @@
-import { EventDispatcher } from '../../../../eventstream/src/event/dispatcher/index';
+import { EventDispatcher } from "@appgenerator/eventstream";
 
-export class RxEventDispatcher extends EventDispatcher {
-}
+export class RxEventDispatcher extends EventDispatcher {}

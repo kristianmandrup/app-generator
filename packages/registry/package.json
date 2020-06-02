@@ -15,11 +15,5 @@
   ],
   "scripts": {
     "start": "tsc -w --preserveWatchOutput"
-  },
-  "peerDependencies": {
-    "@appgenerator/factory": "0.0.1"
-  },
-  "devDependencies": {
-    "@appgenerator/factory": "*"
   }
 }

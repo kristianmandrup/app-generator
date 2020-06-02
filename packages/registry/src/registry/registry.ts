@@ -1,5 +1,9 @@
 import { IRegistry, IRegistryMap, IEntryMap } from "../types";
 
+const isObject = (obj) => {
+  return obj === Object(obj);
+};
+
 export class Registry implements IRegistry {
   name: string;
   path: string = this.name;
@@ -63,6 +67,9 @@ export class Registry implements IRegistry {
   addEntryMap(entryMap: any) {
     this.init();
     Object.entries(entryMap).map(([name, entry]) => {
+      if (isObject(entry)) {
+        this.addEntryMap(entry);
+      }
       if ((entry as any).name) {
         this.addEntry(entry, name);
       } else {

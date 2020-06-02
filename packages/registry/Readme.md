@@ -1,1 +1,3 @@
 # Registry
+
+See [Docs](./docs)

@@ -44,17 +44,21 @@ export class Builder {
     // return names.map(this.buildNamed);
   }
 
-  buildNamed = (name: string) => {
+  buildNamed = (path: string, name: string = "default") => {
     const { factories, schema, built } = this;
     if (!factories) return;
     if (!built) return;
-    const factory = factories[name];
+    const factoryMap = factories.mapAtPath(path);
+    const factory = factoryMap[name];
 
     // such as services
     const entities = schema.entities();
-    return entities.map((entity) => {
+    entities.map((entity) => {
       const instance = factory.create(entity);
-      // built.register({ instance, entity });
+      const registry = built.atPath(path);
+      if (registry) {
+        registry.addEntry({ instance, entity });
+      }
     });
     return built;
   };

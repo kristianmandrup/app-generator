@@ -13,40 +13,70 @@ describe("Registry", () => {
     expect(registry.name).toEqual(name);
   });
 
+  it("has empty factoryList", () => {
+    expect(registry.entryList).toEqual([]);
+  });
+
+  it("has empty registryList", () => {
+    expect(registry.registryList).toEqual([]);
+  });
+
   describe("addRegistry", () => {
-    const b = new Registry("b");
-    registry.addRegistry(b);
+    describe("b", () => {
+      const b = new Registry("b");
+      const bMap = {
+        y: 1,
+      };
+      b.addEntryMap(bMap);
 
-    it("has registry named b", () => {
-      expect(registry.registryNamed("b")).toEqual(b);
-    });
+      registry.addRegistry(b);
 
-    describe("build", () => {
-      const built = b.build();
-      const expected = {};
+      it("has registry named b", () => {
+        expect(registry.registryNamed("b")).toEqual(b);
+      });
 
-      it("builds instance", () => {
-        expect(built).toEqual(expected);
+      it("is in registryList", () => {
+        expect(registry.registryList).toEqual([b]);
+      });
+
+      it("mapAtPath b", () => {
+        expect(registry.mapAtPath["b"]).toEqual(bMap);
+      });
+
+      describe("c under b", () => {
+        const c = new Registry("c");
+        const cMap = {
+          x: 2,
+        };
+        c.addEntryMap(cMap);
+        b.addRegistry(c);
+
+        it("mapAtPath b.c", () => {
+          expect(registry.mapAtPath["b.c"]).toEqual(cMap);
+        });
       });
     });
   });
 
-  describe("addFactory", () => {
-    const name = "f";
-    const f = new Factory(name, schema);
-    registry.addFactory(f);
+  describe("ensureRegistryAtPath", () => {
+    const path = "x.y";
+    const matchingRegistry = registry.ensureRegistryAtPath(path);
+    it("has matching path", () => {
+      expect(matchingRegistry.path).toEqual(path);
+    });
+  });
 
-    it("has factory named f", () => {
-      expect(registry.factoryNamed(name)).toEqual(name);
+  describe("addEntry", () => {
+    const name = "f";
+    const f = {};
+    registry.addEntry(f);
+
+    it("is in entryList", () => {
+      expect(registry.entryList).toEqual([f]);
     });
 
-    // describe("build", () => {
-    //   const built = f.build();
-    //   const expected = {};
-
-    //   it("builds instance", () => {
-    //     expect(built).toEqual(expected);
-    //   });
-    // });
+    it("has entry named f", () => {
+      expect(registry.named(name)).toEqual(name);
+    });
   });
 });

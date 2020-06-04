@@ -16,13 +16,12 @@
   "dependencies": {
     "rxjs": "^6.5.5"
   },
-
   "peerDependencies": {
     "@appgenerator/eventstream": "0.0.1"
   },
   "devDependencies": {
-    "appgenerator/eventstream": "*"
-  },  
+    "@appgenerator/eventstream": "*"
+  },
   "scripts": {
     "start": "tsc -w --preserveWatchOutput"
   }

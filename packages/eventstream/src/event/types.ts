@@ -20,6 +20,7 @@ export interface IEventSubscriber {
 }
 
 export interface IEventDispatcher {
+  name: string;
   dispatch(event: IEvent);
 }
 
@@ -34,9 +35,4 @@ export interface IEvent {
 export interface IEventError extends IEvent {
   message: string;
   code: number;
-}
-
-export interface IEventPublisher {
-  to(eventStream: IEventStream);
-  publish(event: IEvent);
 }

@@ -1,9 +1,9 @@
-import { EventStream } from "../";
-import { EventSubscriber } from "../event";
+import { RxEventStream } from "../";
+import { RxEventSubscriber } from "../event";
 
 describe("EventStream", () => {
   const name = "x";
-  const eventStream = new EventStream(name);
+  const eventStream = new RxEventStream(name);
 
   it("is named", () => {
     expect(eventStream.name).toEqual(name);
@@ -26,8 +26,8 @@ describe("EventStream", () => {
     let eventStream;
 
     beforeEach(() => {
-      eventStream = new EventStream("x");
-      subscriber = new EventSubscriber(topic);
+      eventStream = new RxEventStream("x");
+      subscriber = new RxEventSubscriber(topic);
       eventStream.subscribe(subscriber);
     });
 

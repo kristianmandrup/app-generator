@@ -1,4 +1,4 @@
-import { IEventSubscriber } from "../event";
+import { IEventSubscriber, IEvent } from "../event";
 export class EventStream {
   subscribers = {};
   name: string;
@@ -15,7 +15,7 @@ export class EventStream {
     this.subscribers[name] = subscriber;
   }
 
-  subscriberName(subscriber: string | IEventSubscriber): string {
+  protected subscriberName(subscriber: string | IEventSubscriber): string {
     return typeof subscriber === "string" ? subscriber : subscriber.name;
   }
 
@@ -28,5 +28,5 @@ export class EventStream {
     delete this.subscribers[name];
   }
 
-  onEvent(_event) {}
+  dispatch(_event: IEvent) {}
 }

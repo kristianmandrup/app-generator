@@ -18,11 +18,11 @@ export class EventSubscriber implements IEventSubscriber {
     eventStream.unsubscribe(this);
   }
 
-  onEvent(_event: IEvent) {}
-
   notify(event: IEvent) {
     this.onEvent(event);
   }
+
+  onEvent(_event: IEvent) {}
 
   onError(_error: IEventError) {}
 

@@ -20,7 +20,7 @@ export class IOPlug extends IOConnectorPart implements IIOPlug {
     return this.connector && this.connector.latest;
   }
 
-  onNext = (data: any) => {
+  onEvent = (data: any) => {
     if (!this.latest) return;
     this.latest.data = data;
     this.notify(data);

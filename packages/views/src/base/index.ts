@@ -1,33 +1,28 @@
-import { IEventDispatcher } from '../../../../eventstream/src/event/dispatcher/index';
-import { IMaterializedView } from '../../../materialized-views/src/types';
-
-export interface IView {
-  dispatch(event: IEvent)
-  notify(data: any)
-  render(): any
-}
+import { IEvent, IEventDispatcher } from "@appgenerator/eventstream";
+import { ISelector } from "@appgenerator/selector";
+import { IView } from "../types";
 
 export class BaseView implements IView {
-  dispatcher: IEventDispatcher
-  selector: ISelector
+  dispatcher: IEventDispatcher;
+  selector: ISelector;
 
   injectDispatcher(dispatcher: IEventDispatcher) {
-    this.dispatcher = dispatcher
+    this.dispatcher = dispatcher;
   }
 
   injectSelector(selector: ISelector) {
-    this.selector = selector
+    this.selector = selector;
   }
 
   dispatch(event: IEvent) {
-    this.dispatcher.dispatch(event)
+    this.dispatcher.dispatch(event);
   }
 
   render(): any {
-    return null
+    return null;
   }
 
   notify(data: any) {
-    this.value = this.selector.select()
+    this.value = this.selector.select();
   }
 }

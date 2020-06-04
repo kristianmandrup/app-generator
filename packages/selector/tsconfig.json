@@ -6,5 +6,5 @@
     "rootDir": "src",
     "baseUrl": "."
   },
-  "references": [{ "path": "../selector" }, { "path": "../eventstream" }]
+  "references": [{ "path": "../views" }, { "path": "../materialized-views" }]
 }

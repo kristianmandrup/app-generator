@@ -13,6 +13,14 @@
   "files": [
     "lib"
   ],
+  "peerDependencies": {
+    "@appgenerator/connector": "0.0.1",
+    "@appgenerator/eventstream": "0.0.1"
+  },
+  "devDependencies": {
+    "@appgenerator/connector": "*",
+    "@appgenerator/eventstream": "*"
+  },
   "scripts": {
     "start": "tsc -w --preserveWatchOutput"
   }

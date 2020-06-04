@@ -7,7 +7,7 @@ import {
 } from "@appgenerator/eventstream";
 import { IEventStream } from "../../stream";
 
-export class EventSubscriber extends _EventSubscriber {
+export class RxEventSubscriber extends _EventSubscriber {
   latest: ILatest = {};
   completed: boolean = false;
   subject?: Subject<IEvent>;

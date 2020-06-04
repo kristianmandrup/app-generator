@@ -1,7 +1,7 @@
 import { IEventSubscriber, IEvent } from "@appgenerator/eventstream";
 import { Subject } from "rxjs";
 
-export class EventStream {
+export class RxEventStream {
   name: string;
   subscribers: {
     [key: string]: IEventSubscriber[];
@@ -26,7 +26,7 @@ export class EventStream {
     return Object.values(this.subscribers[topic]);
   }
 
-  hasSubscribers(): boolean {
+  get hasSubscribers(): boolean {
     return this.allSubscribers.length > 0;
   }
 

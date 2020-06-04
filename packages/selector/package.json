@@ -1,7 +1,7 @@
 {
-  "name": "@appgenerator/views",
+  "name": "@appgenerator/selector",
   "version": "0.0.1",
-  "description": "Generic Views",
+  "description": "Material View Selector",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "repository": "",
@@ -15,14 +15,12 @@
   ],
   "dependencies": {},
   "peerDependencies": {
-    "react": "^16.8.0",
-    "react-dom": "^16.8.0",
-    "@appgenerator/selector": "0.0.1",
-    "@appgenerator/eventstream": "0.0.1"
+    "@appgenerator/views": "0.0.1",
+    "@appgenerator/materialized-views": "0.0.1"
   },
   "devDependencies": {
-    "@appgenerator/selector": "*",
-    "@appgenerator/eventstream": "*"
+    "@appgenerator/views": "*",
+    "@appgenerator/materialized-views": "*"
   },
   "scripts": {
     "start": "tsc -w --preserveWatchOutput"

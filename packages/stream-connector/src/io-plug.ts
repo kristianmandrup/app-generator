@@ -1,12 +1,12 @@
-import { IOConnector, IIOPlug } from '../../connector/src';
-import { IEventSubscriber } from '../../eventstream/src/event/types';
+import { IOPlug } from "@appgenerator/connector";
+import { IEventSubscriber } from "@appgenerator/eventstream";
 
-export class StreamIOPlug extends IOPlug implements IIOPlug {
-  subscriber: IEventSubscriber  
+export class StreamIOPlug extends IOPlug {
+  subscriber?: IEventSubscriber;
 
   injectSubscriber(subscriber: IEventSubscriber) {
-    subscriber.onNext = this.next
-    subscriber.onError = this.onError
+    subscriber.onEvent = this.onEvent;
+    subscriber.onError = this.onError;
     this.subscriber = subscriber;
   }
 }

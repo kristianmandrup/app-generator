@@ -1,3 +1,28 @@
+import { IEventStream } from "@appgenerator/eventstream";
+
+export interface INotifiable {
+  injectNotifyTarget(notifyTarget: INotifyTarget);
+  notifyTarget(data: any);
+}
+
+export interface INotifyTarget {
+  notify(data: any);
+  notifyError(error: any);
+}
+
+export interface IPlugMap {
+  [key: string]: IIOPlug;
+}
+
+export interface ISocketMap {
+  [key: string]: IIOSocket;
+}
+
+export interface IConnectable {
+  name: string;
+  setStream(eventStream: IEventStream);
+}
+
 export interface ILatest {
   ignored?: any;
   data?: any;
@@ -22,12 +47,16 @@ export interface IIOPlug extends IIOConnectorPart {
   plugInto(socket: IIOSocket);
   notify(data: any);
   notifyError(error: any);
+  onEvent(data: any);
+  onError(error: any);
 }
 
 export interface IIOSocket extends IIOConnectorPart {
   type: string;
   accept(plug: IIOPlug);
   notify(data: any);
+  setNotifiable(notifiable?: INotifiable);
+  injectNotifyTarget(notifyTarget: INotifyTarget);
 }
 
 export type TSocket = IIOSocket | string;
@@ -40,13 +69,14 @@ export interface IOConnectorAddParams {
 
 export interface IIOConnector {
   type: string;
-  latest: ILatest;
+  latest: IConnectorLatest;
 
   socketNames: string[];
   sockets: IIOSocket[];
   plugNames: string[];
   plugs: IIOPlug[];
 
+  addPair(name: string, autoConnect?: boolean);
   add(opts: IOConnectorAddParams);
   addSocket(socket: IIOSocket);
   addPlug(plug: IIOPlug);

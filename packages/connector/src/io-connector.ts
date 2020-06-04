@@ -5,19 +5,13 @@ import {
   TSocket,
   TPlug,
   IConnectorLatest,
+  IPlugMap,
+  ISocketMap,
 } from "./types";
 import { IOPlug } from "./io-plug";
 import { IOSocket } from "./io-socket";
 import { IStoreCommander } from "@appgenerator/stores";
 import { Connectable } from "./connectable";
-
-export interface IPlugMap {
-  [key: string]: IIOPlug;
-}
-
-export interface ISocketMap {
-  [key: string]: IIOSocket;
-}
 
 export class IOConnector extends Connectable {
   plugMap: IPlugMap = {};
@@ -38,6 +32,7 @@ export class IOConnector extends Connectable {
   protected onData(data: any) {
     this.storeDataReceived(data);
     this.notifyAcceptingSockets(data);
+    this.notifyTarget(data);
   }
 
   protected storeDataReceived(data: any) {
@@ -78,10 +73,15 @@ export class IOConnector extends Connectable {
     return [];
   }
 
-  add({ socket, plug }: IOConnectorAddParams) {
+  addPair(name: string, autoConnect: boolean = false) {
+    this.add({ socket: name, plug: name }, autoConnect);
+  }
+
+  add({ socket, plug }: IOConnectorAddParams, autoConnect: boolean = false) {
     this.addPlug(plug);
     this.addSocket(socket);
-    this.connectLatest();
+    autoConnect && this.connectLatest();
+    return this;
   }
 
   addSocket(socket: TSocket) {

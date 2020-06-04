@@ -1,10 +1,7 @@
 import { IOConnector } from "../io-connector";
-import { EventDispatcher, EventSubscriber } from "@appgenerator/eventstream";
 
 describe("Connectable", () => {
   const connector = new IOConnector("c1");
-  const publisher = new EventDispatcher("p1");
-  const subscriber = new EventSubscriber("s1");
   const data = "hello";
 
   beforeEach(() => {
@@ -51,7 +48,19 @@ describe("Connectable", () => {
     });
   });
 
-  // add({ socketName, plugName }
+  describe("add", () => {
+    const socket = "a";
+    const plug = "a";
+    connector.add({ socket, plug });
+
+    it("adds socket", () => {
+      expect(connector.socketNamed("a")).toBe(socket);
+    });
+
+    it("adds plug", () => {
+      expect(connector.plugNamed("a")).toBe(plug);
+    });
+  });
 
   // addSocket(socket: IOSocket)
 

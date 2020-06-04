@@ -17,10 +17,12 @@
     "start": "tsc -w --preserveWatchOutput"
   },
   "peerDependencies": {
+    "@appgenerator/connector": "0.0.1",
     "@appgenerator/eventstream": "0.0.1",
     "@appgenerator/stores": "0.0.1"
   },
   "devDependencies": {
+    "@appgenerator/connector": "*",
     "@appgenerator/eventstream": "*",
     "@appgenerator/stores": "*"
   }

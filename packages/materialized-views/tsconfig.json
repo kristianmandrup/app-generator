@@ -5,5 +5,9 @@
     "outDir": "lib",
     "rootDir": "src"
   },
-  "references": [{ "path": "../eventstream" }, { "path": "../stores" }]
+  "references": [
+    { "path": "../connector" },
+    { "path": "../eventstream" },
+    { "path": "../stores" }
+  ]
 }

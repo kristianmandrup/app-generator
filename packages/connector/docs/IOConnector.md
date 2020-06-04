@@ -21,21 +21,33 @@ Should notify relevant `sockets` with `error`
 
 Store `error` received by `onError` for history
 
-## add({ socketName, plugName })
+## add({ socketName, plugName }, autoConnect)
 
-Add a new socket and plug with given names. A plug with a given name will automatically notify the socket of the same name.
+Add a new socket and plug with given names. The plug and socket can be auto connected by passing `true` for `autoConnect`.
+
+## addPair(name, autoConnect)
+
+Adds a new socket and plug pair with the same name.
 
 ## addSocket(socket)
 
-Add a socket
+Add a socket either by instance or name
 
 ## addPlug(plug)
 
-Add a plug
+Add a plug either by instance or name
 
 ## connectNamed(from, to)
 
 Connect a plug `from` with a socket `to`
+
+## connectLatest
+
+Connect latest `plug` and `socket` added
+
+## connect(socket, plug)
+
+Connect a `socket` and `plug` by instance
 
 ## socketsAccepting(data)
 

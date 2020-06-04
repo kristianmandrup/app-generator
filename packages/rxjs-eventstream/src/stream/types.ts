@@ -1,7 +1,7 @@
-import { IEventSubscriber } from '../event/subscriber/index';
+import { IEventSubscriber } from "@appgenerator/eventstream";
 
 export interface IEventStream {
-  subscribe(subscriber: any, name?: string)
-  named(name: string)
-  unsubscribe(subscriber: string | IEventSubscriber)
+  subscribe(subscriber: IEventSubscriber, name?: string);
+  named(name: string);
+  unsubscribe(subscriber: string | IEventSubscriber);
 }

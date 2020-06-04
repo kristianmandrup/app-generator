@@ -1,13 +1,22 @@
 import { IEventStream } from "../stream";
 
+export type ILatest = {
+  ignored?: any;
+  data?: any;
+  error?: any;
+  published?: any;
+};
+
 export interface IEventSubscriber {
   name: string;
+  latest: ILatest;
   isIdentical(subscriber: IEventSubscriber): boolean;
   subscribeTo(eventStream: IEventStream);
   unsubscribeFrom(eventStream: IEventStream);
   onEvent(event: IEvent);
   notify(event: IEvent);
   onError(error: IEventError);
+  onComplete();
 }
 
 export interface IEventDispatcher {

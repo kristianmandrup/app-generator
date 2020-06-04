@@ -1,7 +1,9 @@
 import { IEventStream } from "../../stream/types";
-import { IEventError, IEventSubscriber, IEvent } from "../types";
+import { IEventError, IEventSubscriber, IEvent, ILatest } from "../types";
 
 export class EventSubscriber implements IEventSubscriber {
+  latest: ILatest = {};
+
   constructor(public name: string) {}
 
   isIdentical(subscriber: IEventSubscriber): boolean {
@@ -23,4 +25,6 @@ export class EventSubscriber implements IEventSubscriber {
   }
 
   onError(_error: IEventError) {}
+
+  onComplete() {}
 }

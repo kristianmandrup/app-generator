@@ -3,10 +3,13 @@ import {
   EventSubscriber as _EventSubscriber,
   IEvent,
   IEventError,
+  ILatest,
 } from "@appgenerator/eventstream";
 import { IEventStream } from "../../stream";
 
 export class EventSubscriber extends _EventSubscriber {
+  latest: ILatest = {};
+  completed: boolean = false;
   subject?: Subject<IEvent>;
   // eventstream?: IEventStream;
 
@@ -22,11 +25,19 @@ export class EventSubscriber extends _EventSubscriber {
     eventstream.subscribe(this);
   }
 
-  onEvent(_event: IEvent) {}
+  onEvent(event: IEvent) {
+    this.latest.data = event;
+  }
 
   notify(event: IEvent) {
     this.onEvent(event);
   }
 
-  onError(_error: IEventError) {}
+  onError(event: IEventError) {
+    this.latest.error = event;
+  }
+
+  onComplete() {
+    this.completed = true;
+  }
 }

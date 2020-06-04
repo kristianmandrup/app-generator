@@ -1,6 +1,6 @@
-import { IEvent } from "@appgenerator/eventstream";
+import { IEvent, IEventSubscriber } from "@appgenerator/eventstream";
 
-export interface IView {
+export interface IView extends IEventSubscriber {
   dispatch(event: IEvent);
   notify(data: any);
   render(): any;

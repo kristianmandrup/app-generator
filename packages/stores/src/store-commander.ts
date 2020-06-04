@@ -15,11 +15,19 @@ export class StoreCommander {
   store: IStore;
 
   constructor() {
-    this.store = new Store(
+    this.store = new Store();
   }
 
   get data() {
     return this.store.data;
+  }
+
+  get history() {
+    return this.store.history;
+  }
+
+  get latestHistory() {
+    return this.store.latestHistory;
   }
 
   addHistory(name, data) {

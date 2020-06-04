@@ -22,6 +22,10 @@ export class Store {
   history: any[] = [];
   commander?: IStoreCommander;
 
+  get latestHistory() {
+    return this.history.length > 0 ? this.history[this.history.length - 1] : {};
+  }
+
   addHistory(command, data) {
     this.history.push({ command, ...data });
   }

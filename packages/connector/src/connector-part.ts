@@ -1,15 +1,11 @@
-import { IIOConnector } from "./io-connector";
-
-export interface IIOConnectorPart {
-  name: string;
-  type: string;
-  connector?: IIOConnector;
-}
+import { IIOConnector, IIOConnectorPart } from "./types";
+import { ILatest } from "@appgenerator/eventstream/src";
 
 export class IOConnectorPart {
   name: string = "connector part";
   type: string = "unknown";
   connector?: IIOConnector;
+  latest: ILatest = {};
 
   constructor({ name, connector }: any) {
     this.setName(name);

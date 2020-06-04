@@ -1,63 +1,43 @@
 import { ISelectQuery } from "./types";
-import { IMaterializedView } from "@appgenerator/materialized-views";
+import { IEventStream } from "@appgenerator/eventstream";
+import { IOConnector } from "@appgenerator/connector";
+import { IdentitySelectQuery } from "./query";
 
 export * from "./types";
 
-export class IdentitySelectQuery implements ISelectQuery {
-  run(data: any): any {
-    return data;
-  }
-}
-
 export class Selector {
+  dataSourceConnector: IOConnector; // connect top data source
+  stream?: IEventStream; // for notifying
   selectQuery: ISelectQuery;
   data: any;
-  views: {
-    [key: string]: IView;
-  } = {};
+  selectedData: any;
 
   constructor(selectQuery: ISelectQuery) {
     this.selectQuery = selectQuery || new IdentitySelectQuery();
+  }
+
+  setDataSourceConnector(dataSourceConnector: IOConnector) {
+    this.dataSourceConnector = dataSourceConnector;
+    return this;
+  }
+
+  setEventStream(stream: IEventStream) {
+    this.stream = stream;
+    return this;
   }
 
   setQuery(selectQuery) {
     this.selectQuery = selectQuery;
   }
 
-  addViewTarget(view: IView, name?: string) {
-    const $name = name || view.name;
-    this.views[$name] = view;
-  }
-
-  removeViewTarget(view: IView, name?: string) {
-    const $name = name || view.name;
-    delete this.views[$name];
-  }
-
-  // injectMVListener(mvListener: IMVListener) {
-  //   mvListener.injectNotifyTarget(this);
-  //   this.mvListener = mvListener;
-  // }
-
-  injectMaterializedView(mv: IMaterializedView) {
-    // const mvListener = new MVListener();
-    // mvListener.listenTo(mVController);
-    // this.injectMVListener(mvListener);
-  }
-
   notify(data) {
     this.data = data;
+    if (!this.stream) return;
+    this.stream.dispatch(this.selectData());
   }
 
-  get viewList() {
-    return Object.values(this.views);
-  }
-
-  notifyViews(names: string[] = []) {
-    this.viewList.map((view) => view.notify(this.data));
-  }
-
-  select(): any {
-    // return this.selectQuery(this.data);
+  selectData(): any {
+    this.selectedData = this.selectQuery.run(this.data);
+    return this.selectedData;
   }
 }

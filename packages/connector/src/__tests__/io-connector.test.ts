@@ -1,111 +1,53 @@
-import { Connectable } from "../connectable";
-import { Publisher } from "../publisher";
 import { IOConnector } from "../io-connector";
-import { Subscriber } from "../subscriber";
+import { EventDispatcher, EventSubscriber } from "@appgenerator/eventstream";
 
 describe("Connectable", () => {
   const connector = new IOConnector("c1");
-  const publisher = new Publisher("p1");
-  const subscriber = new Subscriber("s1");
+  const publisher = new EventDispatcher("p1");
+  const subscriber = new EventSubscriber("s1");
   const data = "hello";
 
   beforeEach(() => {
     connector.clear();
   });
 
-  describe("subscribe", () => {
-    connector.subscribe(subscriber);
-
-    it("has subscriber", () => {
-      expect(connector.hasSubscriber(subscriber)).toBeTruthy();
-    });
-  });
-
-  describe("notify", () => {
-    connector.subscribe(subscriber);
-    connector.notify(data);
-
-    // this.storeNotifyData(data);
-    // this.notifySockets(data);
+  describe("onData", () => {
+    connector.addSocket("a");
+    const plug = connector.addPlug("a").latest.plug;
+    plug.notify(data);
 
     it("notifies", () => {
-      // expect(subscriber.latest.received).toBe(data)
+      expect(connector.latest.data).toBe(data);
     });
   });
 
-  describe("publish", () => {
-    connector.subscribe(subscriber);
-    connector.publish(data);
-
-    // this.storeNotifyData(data);
-    // this.notifySockets(data);
-
-    it("notifies", () => {
-      // expect(subscriber.latest.received).toBe(data)
-    });
-  });
-
-  describe("storeNotifyData", () => {
-    connector.subscribe(subscriber);
-    connector.storeNotifyData(data);
-
-    // this.storeNotifyData(data);
-    // this.notifySockets(data);
+  describe("storeDataReceived", () => {
+    connector.addSocket("a");
+    const plug = connector.addPlug("a").latest.plug;
+    plug.notify(data);
 
     it("notifies store with new data", () => {
-      // expect(subscriber.latest.received).toBe(data)
-    });
-  });
-
-  describe("notifySockets", () => {
-    connector.subscribe(subscriber);
-    connector.add({ socketName: "s1", plugName: "p1" });
-    connector.notifySockets(data);
-
-    // this.storeNotifyData(data);
-    // this.notifySockets(data);
-
-    it("notifies", () => {
-      // expect(subscriber.latest.received).toBe(data)
-      // expect(connector.socketNamed("s1").received).toBe(data)
+      expect(connector.dataStore.latestHistory).toBe(data);
     });
   });
 
   describe("notifyError", () => {
-    connector.subscribe(subscriber);
-    connector.notifyError(data);
-
-    // this.storeNotifyData(data);
-    // this.notifySockets(data);
+    const socket = connector.addSocket("a").latest.socket;
+    const plug = connector.addPlug("a").latest.plug;
+    plug.notifyError(data);
 
     it("notifies", () => {
-      // expect(subscriber.latest.received).toBe(data)
+      expect(connector.latest.error).toBe(data);
     });
   });
 
-  describe("notifySockets", () => {
-    connector.subscribe(subscriber);
-    const sockets = [];
-    connector.notifyAll(sockets, data);
-
-    // this.storeNotifyData(data);
-    // this.notifySockets(data);
+  describe("notifyAcceptingSockets", () => {
+    const socket = connector.addSocket("a").latest.socket;
+    const plug = connector.addPlug("a").latest.plug;
+    connector.notifyAcceptingSockets(data);
 
     it("notifies", () => {
-      // expect(subscriber.latest.received).toBe(data)
-    });
-  });
-
-  describe("socketsAccepting", () => {
-    connector.subscribe(subscriber);
-    const sockets = [];
-    connector.socketsAccepting(data);
-
-    // this.storeNotifyData(data);
-    // this.notifySockets(data);
-
-    it("accepts", () => {
-      // expect(subscriber.latest.received).toBe(data)
+      expect(socket.latest.data).toBe(data);
     });
   });
 

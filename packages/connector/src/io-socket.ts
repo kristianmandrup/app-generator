@@ -1,20 +1,10 @@
-import { IIOPlug } from "./io-plug";
-import { IIOConnectorPart, IOConnectorPart } from "./connector-part";
+import { IIOPlug } from "./types";
+import { IOConnectorPart } from "./connector-part";
 import { INotifier } from "./notifier";
-
-export interface IIOSocket extends IIOConnectorPart {
-  type: string;
-  accept(plug: IIOPlug);
-  notify(data: any);
-}
 
 export class IOSocket extends IOConnectorPart {
   plug?: IIOPlug;
   notifier?: INotifier;
-
-  injectNotifier(notifier: INotifier) {
-    this.notifier = notifier;
-  }
 
   accept(plug: IIOPlug) {
     this.checkCompatibility(plug);
@@ -23,6 +13,11 @@ export class IOSocket extends IOConnectorPart {
   }
 
   notify(data: any) {
-    this.plug?.notify(data);
+    this.notifyPlug(data);
+  }
+
+  notifyPlug(data: any) {
+    if (!this.plug) return;
+    this.plug.notify(data);
   }
 }

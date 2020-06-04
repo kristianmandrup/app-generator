@@ -15,12 +15,12 @@
   ],
   "dependencies": {},
   "peerDependencies": {
-    "@appgenerator/views": "0.0.1",
-    "@appgenerator/materialized-views": "0.0.1"
+    "@appgenerator/connector": "0.0.1",
+    "@appgenerator/eventstream": "0.0.1"
   },
   "devDependencies": {
-    "@appgenerator/views": "*",
-    "@appgenerator/materialized-views": "*"
+    "@appgenerator/connector": "*",
+    "@appgenerator/eventstream": "*"
   },
   "scripts": {
     "start": "tsc -w --preserveWatchOutput"

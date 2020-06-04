@@ -1,12 +1,5 @@
-import { IIOSocket } from "./io-socket";
-import { IIOConnectorPart, IOConnectorPart } from "./connector-part";
-
-export interface IIOPlug extends IIOConnectorPart {
-  socket: IIOSocket;
-  plugInto(socket: IIOSocket);
-  notify(data: any);
-  notifyError(error: any);
-}
+import { IIOSocket, IIOPlug } from "./types";
+import { IOConnectorPart } from "./connector-part";
 
 export class IOPlug extends IOConnectorPart implements IIOPlug {
   socket: IIOSocket;
@@ -14,10 +7,6 @@ export class IOPlug extends IOConnectorPart implements IIOPlug {
   constructor(opts: any = {}) {
     super(opts);
     this.socket = opts.socket;
-  }
-
-  get latest() {
-    return this.connector && this.connector.latest;
   }
 
   onEvent = (data: any) => {

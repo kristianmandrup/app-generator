@@ -7,7 +7,11 @@ export type ILatest = {
   published?: any;
 };
 
-export interface IEventSubscriber {
+export interface INotifyTarget {
+  notify(event: IEvent);
+}
+
+export interface IEventSubscriber extends INotifyTarget {
   name: string;
   latest: ILatest;
   isIdentical(subscriber: IEventSubscriber): boolean;

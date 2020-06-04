@@ -1,17 +1,21 @@
-import { IEventSubscriber, IEvent } from "../event";
+import { IEventSubscriber, IEvent, INotifyTarget } from "../event";
+
 export class EventStream {
-  subscribers = {};
+  subscribers: {
+    [key: string]: INotifyTarget;
+  } = {};
   name: string;
 
   constructor(name: string) {
     this.name = name;
   }
 
-  subscribe(subscriber: any, name?: string) {
+  get subscriberList() {
+    return Object.values(this.subscribers);
+  }
+
+  subscribe(subscriber: any, name: string = "default") {
     name = name || subscriber.name;
-    if (!name) {
-      throw "Name required";
-    }
     this.subscribers[name] = subscriber;
   }
 
@@ -28,5 +32,8 @@ export class EventStream {
     delete this.subscribers[name];
   }
 
-  dispatch(_event: IEvent) {}
+  dispatch(event: IEvent) {
+    this.subscriberList.map((subscriber) => subscriber.notify(event));
+    return this;
+  }
 }

@@ -17,3 +17,11 @@ Triggered on any materialized view update and notifies `plug` on connector with 
 ## update(data)
 
 Updates the materialized view with incoming data
+
+## updateController(data)
+
+Update controller with incoming data
+
+## onControllerData(data)
+
+Receive new data from Controller

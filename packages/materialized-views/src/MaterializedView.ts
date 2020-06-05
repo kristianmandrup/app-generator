@@ -1,6 +1,10 @@
 import { IMaterializedView, IMVController } from "./types";
-import { IEventSubscriber } from "@appgenerator/eventstream";
-import { IIOConnector, IIOSocket, IIOPlug } from "@appgenerator/connector";
+import {
+  connectTo,
+  IIOConnector,
+  IIOSocket,
+  IIOPlug,
+} from "@appgenerator/connector";
 
 export class MaterializedView implements IMaterializedView {
   name: string;
@@ -26,15 +30,7 @@ export class MaterializedView implements IMaterializedView {
   }
 
   connectTo(connector: IIOConnector) {
-    connector.addPair("mv:" + this.name);
-    const { latest } = connector;
-    this.conn = {
-      ...latest,
-    };
-    const { socket } = latest || {};
-
-    socket && socket.injectNotifyTarget(this);
-    this.connector = connector;
+    connectTo(this, connector, "mv:");
     return this;
   }
 
@@ -45,7 +41,7 @@ export class MaterializedView implements IMaterializedView {
   notifyError(_data) {}
 
   // update view using data from connector
-  update(_data) {}
+  protected update(_data) {}
 
   // notify connector plug with update
   onUpdated(mvData: any) {
@@ -54,8 +50,12 @@ export class MaterializedView implements IMaterializedView {
     return this;
   }
 
-  subscribeWith(subscriber: IEventSubscriber, name?: string) {
+  updateController(data: any) {
     if (!this.controller) return;
-    this.controller.subscribeWith(subscriber, name);
+    this.controller.onEvent(data);
+  }
+
+  onControllerData(data: any) {
+    this.onUpdated(data);
   }
 }

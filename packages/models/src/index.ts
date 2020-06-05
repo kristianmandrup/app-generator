@@ -1,8 +1,10 @@
-import * as display from "./display";
-import * input from "./input";
+import * as list from "./list";
+import * as item from "./item";
+
+export * from "./item";
+export * from "./list";
 
 export const models = {
-  display,
-  input
-}
-
+  list,
+  item,
+};

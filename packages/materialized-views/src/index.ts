@@ -1,11 +1,9 @@
 import * as controller from "./controller";
-import * as selector from "./selector";
+import { MaterializedView } from "./MaterializedView";
 export * from "./MaterializedView";
 export * from "./types";
 
-export interface IMaterializedView {}
-
 export const materializedView = {
+  MaterializedView,
   controller,
-  selector,
 };

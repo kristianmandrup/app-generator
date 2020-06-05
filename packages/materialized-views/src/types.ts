@@ -1,4 +1,5 @@
 import { IEventSubscriber, IEvent } from "@appgenerator/eventstream";
+import { IIOConnector } from "@appgenerator/connector";
 
 export interface IMVController {
   data: any;
@@ -9,18 +10,11 @@ export interface IMVController {
   updateStore(event: IEvent);
 }
 
-export interface IMVListener {
-  injectNotifyTarget(notifyTarget: INotifyTarget);
-  listenTo(materializedView: IMaterializedView, name?: string);
-  notify(data: any): any;
-}
-
-export interface INotifyTarget {
-  notify(data: any);
-}
-
 export interface IMaterializedView {
   data(): any;
   setController(controller: IMVController);
-  subscribeWith(subscriber: IEventSubscriber, name?: string);
+  connectTo(connector: IIOConnector);
+  notify(data);
+  // update(_data)
+  onUpdated(mvData: any);
 }

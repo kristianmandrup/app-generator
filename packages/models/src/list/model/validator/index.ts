@@ -1,4 +1,4 @@
-export class ItemValidator {
+export class ListValidator {
   validate(_data: any): boolean {
     return true;
   }

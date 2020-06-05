@@ -4,11 +4,11 @@ import { IEventDispatcher } from "@appgenerator/eventstream";
 import { IListDisplay } from "@appgenerator/views";
 import { IMaterializedView } from "@appgenerator/materialized-views";
 
-export interface IEntityView {
+export interface IPropertyView {
   render(): any;
 }
 
-export class EntityView {
+export class PropertyView {
   controller?: IEntityController;
   view?: IListDisplay;
   dispatcher?: IEventDispatcher;

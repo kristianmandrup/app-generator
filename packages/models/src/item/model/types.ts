@@ -1,3 +1,1 @@
-export interface IItemModel {
-  a: string;
-}
+export interface IItemModel {}

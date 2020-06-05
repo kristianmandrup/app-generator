@@ -1,12 +1,11 @@
-import { IItemModel } from '../../../../../models/src/types';
+import { IItemModel } from "@appgenerator/models";
 
-export class EntityModel {
-  itemModel: IItemModel
+export class PropertyModel {
+  itemModel?: IItemModel;
 
-  constructor(public name: string) {
-  }
-  
+  constructor(public name: string) {}
+
   inject(itemModel: IItemModel) {
-    this.itemModel = itemModel
+    this.itemModel = itemModel;
   }
 }

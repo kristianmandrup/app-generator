@@ -10,6 +10,9 @@
       "path": "../api"
     },
     {
+      "path": "../models"
+    },
+    {
       "path": "../materialized-views"
     },
     {

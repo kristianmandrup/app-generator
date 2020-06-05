@@ -1,15 +1,15 @@
-import { IEntityController } from "../../controllers";
+import { IBaseController } from "../../controllers";
 import { IRegistry } from "@appgenerator/api";
 import { IEventDispatcher } from "@appgenerator/eventstream";
 import { IListDisplay } from "@appgenerator/views";
 import { IMaterializedView } from "@appgenerator/materialized-views";
 
-export interface IEntityView {
+export interface IBaseView {
   render(): any;
 }
 
-export class EntityView {
-  controller?: IEntityController;
+export class BaseView {
+  controller?: IBaseController;
   view?: IListDisplay;
   dispatcher?: IEventDispatcher;
   registry?: IRegistry;
@@ -25,7 +25,7 @@ export class EntityView {
     this.materializedView = materializedView;
   }
 
-  injectController(controller: IEntityController) {
+  injectController(controller: IBaseController) {
     this.controller = controller;
   }
 

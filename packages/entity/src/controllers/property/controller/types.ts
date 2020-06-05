@@ -1,3 +1,1 @@
-export interface A {
-  a: string;
-}
+export interface IPropertyController {}

@@ -1,16 +1,13 @@
-import { IListModel } from '../../../../../models/src/types';
+import { IListModel } from "@appgenerator/models";
 
-export interface IEntityModel {
-}
-
+export interface IEntityModel {}
 
 export class EntityModel {
-  listModel: IListModel
+  listModel?: IListModel;
 
-  constructor(public name: string) {
-  }
-  
+  constructor(public name: string) {}
+
   inject(itemModel: IListModel) {
-    this.listModel = itemModel
+    this.listModel = itemModel;
   }
 }

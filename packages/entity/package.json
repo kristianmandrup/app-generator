@@ -14,14 +14,18 @@
     "lib"
   ],
   "peerDependencies": {
+    "@appgenerator/api": "0.0.1",
     "@appgenerator/eventstream": "0.0.1",
     "@appgenerator/views": "0.0.1",
-    "@appgenerator/materialized-views": "0.0.1"
+    "@appgenerator/materialized-views": "0.0.1",
+    "@appgenerator/models": "0.0.1"
   },
   "devDependencies": {
+    "@appgenerator/api": "*",
     "@appgenerator/eventstream": "*",
     "@appgenerator/views": "*",
-    "@appgenerator/materialized-views": "*"
+    "@appgenerator/materialized-views": "*",
+    "@appgenerator/models": "*"
   },
   "scripts": {
     "start": "tsc -w --preserveWatchOutput"
